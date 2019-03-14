@@ -1,22 +1,56 @@
 #include <Wire.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(5, 6); // RX, TX
+
+int seatsAvailable;
+int potPin = A0;
+String address = "";
+bool isConnected = false;
+String message;
 
 void setup() {
-  Wire.begin(8);                // join i2c bus with address #8
-  Wire.onReceive(receiveEvent); // register event
-  Serial.begin(9600);           // start serial for output
+  Serial.begin(9600);
+  mySerial.begin(9600);
 }
 
 void loop() {
-  delay(100);
+  if (isConnected == false) {
+    readAddress();
+    if (address != "") {
+      Connect(address.toInt());
+    }
+  }
+  else {
+    mySerial.print("#");
+    mySerial.print(address.toInt() + 1);
+    mySerial.println("%");
+  }
+  seatsAvailable = analogRead(potPin);
 }
 
-// function that executes whenever data is received from master
-// this function is registered as an event, see setup()
-void receiveEvent(int howMany) {
-  while (1 < Wire.available()) { // loop through all but the last
-    char c = Wire.read(); // receive byte as a character
-    Serial.print(c);         // print the character
+void requestEvent() {
+  Wire.write(seatsAvailable / 256);
+  Wire.write(seatsAvailable);
+  Serial.println(seatsAvailable);
+}
+
+void readAddress() {
+  if (mySerial.available() > 0) {
+    char readChar = (char) mySerial.read();
+    message = message + readChar;
+    message.trim();
   }
-  int x = Wire.read();    // receive byte as an integer
-  Serial.println(x);         // print the integer
+  if (message.startsWith("#") && message.endsWith("%")) {
+    message = message.substring(1, message.length() - 1);
+    address = message;
+    message = "";
+  }
+}
+
+void Connect(int address) {
+  Wire.begin(address);
+  Wire.onRequest(requestEvent);
+  isConnected = true;
+  Serial.println(address);
 }
