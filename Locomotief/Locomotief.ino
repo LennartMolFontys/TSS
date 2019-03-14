@@ -1,17 +1,16 @@
 #include <Wire.h>
 
 void setup() {
-  Wire.begin(); // join i2c bus (address optional for master)
+  Wire.begin();
+  Serial.begin(9600);
 }
 
-byte x = 0;
-
 void loop() {
-  Wire.beginTransmission(8); // transmit to device #8
-  Wire.write("x is ");        // sends five bytes
-  Wire.write(x);              // sends one byte
-  Wire.endTransmission();    // stop transmitting
+  Wire.requestFrom(8, 6);
 
-  x++;
+  while (Wire.available()) {
+    char c = Wire.read();
+    Serial.print(c);
+  }
   delay(500);
 }
