@@ -35,7 +35,6 @@ void loop() {
 
     case 1:
       requestSeats(wagon);
-      delay(500);
       wagon++;
       if (wagon > wagonNummer){
         wagon = 1;
