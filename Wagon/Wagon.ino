@@ -1,56 +1,59 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial mySerial(5, 6); // RX, TX
+#define potPin A0
+#define addressBusRX 5
+#define addressBusTX 6
+
+SoftwareSerial addressBus(addressBusRX, addressBusTX);
 
 int seatsAvailable;
-int potPin = A0;
-String address = "";
+int address = 0;
 bool isConnected = false;
-String message;
+String addressMessage;
 
 void setup() {
   Serial.begin(9600);
-  mySerial.begin(9600);
+  addressBus.begin(9600);
 }
 
 void loop() {
-  if (isConnected == false) {
+  if (!isConnected) {
     readAddress();
-    if (address != "") {
-      Connect(address.toInt());
+    if (address != 0) {
+      Connect(address);
     }
   }
   else {
-    mySerial.print("#");
-    mySerial.print(address.toInt() + 1);
-    mySerial.println("%");
+    addressBus.print("#");
+    addressBus.print(address + 1);
+    addressBus.println("%");
   }
   seatsAvailable = analogRead(potPin);
 }
 
-void requestEvent() {
+void sendSeats() {
   Wire.write(seatsAvailable / 256);
   Wire.write(seatsAvailable);
   Serial.println(seatsAvailable);
 }
 
 void readAddress() {
-  if (mySerial.available() > 0) {
-    char readChar = (char) mySerial.read();
-    message = message + readChar;
-    message.trim();
+  if (addressBus.available() > 0) {
+    char readChar = (char) addressBus.read();
+    addressMessage = addressMessage + readChar;
+    addressMessage.trim();
   }
-  if (message.startsWith("#") && message.endsWith("%")) {
-    message = message.substring(1, message.length() - 1);
-    address = message;
-    message = "";
+  if (addressMessage.startsWith("#") && addressMessage.endsWith("%")) {
+    addressMessage = addressMessage.substring(1, addressMessage.length() - 1);
+    address = addressMessage.toInt();
+    addressMessage = "";
   }
 }
 
-void Connect(int address) {
-  Wire.begin(address);
-  Wire.onRequest(requestEvent);
+void Connect(int connectToAddress) {
+  Wire.begin(connectToAddress);
+  Wire.onRequest(sendSeats);
   isConnected = true;
-  Serial.println(address);
+  Serial.println(connectToAddress);
 }

@@ -1,52 +1,50 @@
 #include <Wire.h>
 #include <SoftwareSerial.h>
-String addressString = "#1%";
 
+#define scanState 0
+#define printSeatState 1
+#define addressBusRX 5
+#define addressBusTX 6
 
-int staat = 0;
-int wagonNummer = 1;
+SoftwareSerial addressBus(addressBusRX, addressBusTX);
 
-int wagon = 1;
-
-
-SoftwareSerial mySerial(5, 6); // RX, TX
+int state = scanState;
+int numberOfCarriages = 1;
+int currentCarriage = 1;
 
 void setup() {
-  mySerial.begin(9600);
+  addressBus.begin(9600);
   Wire.begin();
   Serial.begin(9600);
 }
 
 void loop() {
-  mySerial.println(addressString);
-  switch (staat) {
-    case 0:
-      if (reactieVanWagon(wagonNummer)) {
-        Serial.print("Aantal wagons: ");
-        Serial.println(wagonNummer);
-        wagonNummer++;
-        staat = 0;
+  addressBus.println("#1%");
+  switch (state) {
+    case scanState:
+      if (pollCarriages(numberOfCarriages)) {
+        Serial.print("Number of carriages: ");
+        Serial.println(numberOfCarriages);
+        numberOfCarriages++;
       }
       else {
-        wagonNummer--;
-        staat = 1;
+        numberOfCarriages--;
+        state = printSeatState;
       }
       break;
 
-    case 1:
-      requestSeats(wagon);
-      wagon++;
-      if (wagon > wagonNummer){
-        wagon = 1;
+    case printSeatState:
+      requestSeats(currentCarriage);
+      currentCarriage++;
+      if (currentCarriage > numberOfCarriages) {
+        currentCarriage = 1;
       }
       break;
   }
 }
 
-
-
-bool reactieVanWagon(int nummer) {
-  Wire.requestFrom(nummer, 1);
+bool pollCarriages(int Carriage) {
+  Wire.requestFrom(Carriage, 1);
   if (Wire.available()) {
     return true;
   }
@@ -55,14 +53,14 @@ bool reactieVanWagon(int nummer) {
   }
 }
 
-void requestSeats(int f){
-  Wire.requestFrom(f, 2);
-      Serial.print("Wagon ");
-      Serial.print(f);
-      Serial.print(": ");
-      if (Wire.available()) {
-        int i = Wire.read() * 256 + Wire.read();
-        Serial.print(i);
-      }
-      Serial.println("");
+void requestSeats(int Carriage) {
+  Serial.print("Carriage ");
+  Serial.print(Carriage);
+  Serial.print(": ");
+  Wire.requestFrom(Carriage, 2);
+  if (Wire.available()) {
+    int i = Wire.read() * 256 + Wire.read();
+    Serial.print(i);
+  }
+  Serial.println("");
 }
