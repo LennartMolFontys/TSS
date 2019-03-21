@@ -1,0 +1,21 @@
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\bin\Debug\SocketServer.exe.config
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\bin\Debug\SocketServer.exe
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\bin\Debug\SocketServer.pdb
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\obj\Debug\SocketServer.csprojResolveAssemblyReference.cache
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\obj\Debug\SocketServer.csproj.CoreCompileInputs.cache
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\obj\Debug\SocketServer.exe
+C:\Users\Renata Frenken\source\repos\SocketServer\SocketServer\obj\Debug\SocketServer.pdb
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.exe.config
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.exe
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.pdb
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csproj.CoreCompileInputs.cache
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.exe
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.pdb
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csprojAssemblyReference.cache
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.exe.config
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.exe
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.pdb
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csprojAssemblyReference.cache
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csproj.CoreCompileInputs.cache
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.exe
+D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.pdb

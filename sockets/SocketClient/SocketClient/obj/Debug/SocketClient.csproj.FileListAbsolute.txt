@@ -1,0 +1,21 @@
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\bin\Debug\SocketClient.exe.config
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\bin\Debug\SocketClient.exe
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\bin\Debug\SocketClient.pdb
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\obj\Debug\SocketClient.csprojResolveAssemblyReference.cache
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\obj\Debug\SocketClient.exe
+C:\Users\Renata Frenken\source\repos\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe.config
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.pdb
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csprojAssemblyReference.cache
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.exe
+D:\documenten\semester2\Network Technology\t-sem2-code-master-d3062b59d7ea03a2485972caf81aa44b5fc52c9f\nt21\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe.config
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.pdb
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csprojAssemblyReference.cache
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.exe
+D:\documenten\semester2\Proftaak\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
