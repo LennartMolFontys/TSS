@@ -25,7 +25,9 @@ String displayMessage = "";
 String lastDisplayMessage = "";
 
 /*------------------------------------------------==||## Setup ##||==------------------------------------------------*/
-TM1637Display display(CLK1, DIO1);
+TM1637Display display1(CLK1, DIO1);
+TM1637Display display2(CLK2, DIO2);
+TM1637Display display3(CLK3, DIO3);
 
 void setup()
 {
@@ -37,7 +39,9 @@ void setup()
   pinMode(LED3Green, OUTPUT);
 
   Serial.begin(9600);
-  display.setBrightness(0x0f);
+  display1.setBrightness(0x0f);
+  display2.setBrightness(0x0f);
+  display3.setBrightness(0x0f);
 }
 
 /*------------------------------------------------==||## Loop ##||==------------------------------------------------*/
@@ -49,12 +53,11 @@ void loop()
     case idle:
       if (displayMessage != lastDisplayMessage) {
         state = writeToDisplayState;
-        Serial.println(displayMessage);
       }
       break;
 
     case writeToDisplayState:
-      if (WriteToDisplay(displayMessage, lastDisplayMessage))
+      if (WriteToDisplay(displayMessage))
       {
         state = writeToLEDStripState;
       }
@@ -62,8 +65,10 @@ void loop()
 
     case writeToLEDStripState:
       lastDisplayMessage = displayMessage;
-      Serial.println(lastDisplayMessage);
-      state = idle;
+      if (WriteToLEDStrip(displayMessage))
+      {
+        state = idle;
+      }
       break;
   }
 }
@@ -85,11 +90,24 @@ void ReadSerial()
 }
 
 /*------------------------------------------------==||## Write Message To Display ##||==------------------------------------------------*/
-bool WriteToDisplay(String messageToDisplay, String lastMessageToDisplay)
+bool WriteToDisplay(String messageToDisplay)
 {
   static int displayNumber = 0;
   int displayText = messageToDisplay.substring((displayNumber * 4), (displayNumber * 4) + 4).toInt();
-  display.showNumberDec(displayText, true);
+  switch (displayNumber)
+  {
+    case 0:
+      display1.showNumberDec(displayText, true);
+      break;
+
+    case 1:
+      display2.showNumberDec(displayText, true);
+      break;
+
+    case 2:
+      display3.showNumberDec(displayText, true);
+      break;
+  }
   if ((displayNumber + 1) >= ((messageToDisplay.length() + 1) / 4))
   {
     displayNumber = 0;
@@ -98,6 +116,58 @@ bool WriteToDisplay(String messageToDisplay, String lastMessageToDisplay)
   else
   {
     displayNumber++;
+    return false;
+  }
+}
+
+/*------------------------------------------------==||## Write Message To LED Strip ##||==------------------------------------------------*/
+bool WriteToLEDStrip(String messageToDisplay)
+{
+  static int stripNumber = 0;
+  int red = 0;
+  int green = 0;
+  
+  int numberOfSeats = messageToDisplay.substring((stripNumber * 4), (stripNumber * 4) + 4).toInt();
+  if(numberOfSeats <= 5)
+  {
+    red = 255;
+    green = 0;
+  }
+  else if(numberOfSeats <= 20)
+  {
+    red = 255;
+    green = 30;
+  }
+  else
+  {
+    red = 0;
+    green = 100;
+  }
+  switch (stripNumber)
+  {
+    case 0:
+      analogWrite(LED1Red, red);
+      analogWrite(LED1Green, green);
+      break;
+
+    case 1:
+      analogWrite(LED2Red, red);
+      analogWrite(LED2Green, green);
+      break;
+
+    case 2:
+      analogWrite(LED3Red, red);
+      analogWrite(LED3Green, green);
+      break;
+  }
+  if ((stripNumber + 1) >= ((messageToDisplay.length() + 1) / 4))
+  {
+    stripNumber = 0;
+    return true;
+  }
+  else
+  {
+    stripNumber++;
     return false;
   }
 }
