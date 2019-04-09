@@ -35,24 +35,34 @@ namespace SocketClient
 
                 while (sendLine != "quit")
                 {
+                    /*trainData = ReadMessage();   
                     string message = serial.ReadMessages();
                     if(message != null)
                     {
                         trainData = message;
                     }
-                    Console.WriteLine(trainData);
+                    Console.WriteLine(trainData);*/
 
-                    if (incomingMessage.Contains("send"))
+                    if (incomingMessage.Contains("Initialize"))
                     {
+                        serial.Send("GetUnitInfo");
+                        trainData = ReadMessage();
                         byte[] data = Encoding.ASCII.GetBytes(trainData);
                         stream.Write(data, 0, data.Length);
                     }
+                    else if(incomingMessage.Contains("SeatInfo"))
+                    {
+                        serial.Send("GetUnitInfo");
+                        trainData = ReadMessage();
+                        byte[] data = Encoding.ASCII.GetBytes(trainData);
+                        stream.Write(data, 0, data.Length);
+                    }
+
                     if (stream.DataAvailable == true)
                     {
                         int num = stream.Read(bytes, 0, bytes.Length);
                         incomingMessage = Encoding.ASCII.GetString(bytes, 0, num);
-                        Console.WriteLine(incomingMessage);
-                    
+                        Console.WriteLine(incomingMessage); 
                     }
                     
                 }
@@ -64,7 +74,21 @@ namespace SocketClient
                     Console.WriteLine(e.ToString());
              }
             Console.Read();
+
+
         }
 
+        public static string ReadMessage()
+        {
+            string Traindata = "";
+            string message = serial.ReadMessages();
+            if (message != null || message != string.Empty)
+            {
+                Traindata = message;
+            }
+
+            return Traindata;
+        }
     }
+
 }

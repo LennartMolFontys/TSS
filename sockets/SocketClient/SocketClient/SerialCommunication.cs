@@ -92,5 +92,10 @@ namespace SocketClient
         {
             return serialPort.ReadLine();
         }
+
+        public void Send(string SendString)
+        {
+            serialPort.WriteLine(SendString);
+        }
     }
 }
