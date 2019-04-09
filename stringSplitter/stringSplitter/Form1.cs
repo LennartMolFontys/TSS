@@ -21,7 +21,9 @@ namespace stringSplitter
         {
             string initialiseString = "ID:2365UnitAmount:3Length:3TotalSeats:30Length:5TotalSeats:30Length:6TotalSeats:30";
             label1.Text = StringSplitter.GetTrainId(initialiseString).ToString();
-            StringSplitter.GetUnitInfo(initialiseString, StringSplitter.GetUnitAmount(initialiseString));
+            int[,] treininfo = StringSplitter.getUnitInfo(initialiseString);
+            MessageBox.Show(StringSplitter.GetUnitAmount(initialiseString).ToString());
+            StringSplitter.
         }
     }
 }

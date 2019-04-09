@@ -8,6 +8,10 @@ namespace stringSplitter
 {
     static class StringSplitter
     {
+        public static string InitialiseFormat { get; } = "ID:<value>UnitAmount:<value>Length:<value>TotalSeats:<value><value>Length:<value>TotalSeats:<value>...";
+        public static string SeatInfoFormat { get; } = "SeatsTaken:<value>SeatsTaken:<value>...";
+        private static string[] splitStrings = new string[] { "Length:", "TotalSeats:", "SeatsTaken:" };
+
 
         public static int GetTrainId(string initialiseString)
         {
@@ -27,28 +31,38 @@ namespace stringSplitter
             return unitAmount;
         }
 
-        public static List<int[]> GetUnitInfo(string initialiseString, int unitAmount)
-        {
-            string lengthString = "Length:";
-            string seatsString = "TotalSeats:";
-            int searchStartPoint = 0;
-            List<int[]> unitInfo = new List<int[]>();
-            for(int i = 0; i < unitAmount; i++)
-            {
-                int startPoint = initialiseString.IndexOf(lengthString, searchStartPoint) + lengthString.Length;
-                searchStartPoint = startPoint;
-                int length = initialiseString.IndexOf(seatsString, searchStartPoint) - startPoint;
-                int unitLength = Convert.ToInt32(initialiseString.Substring(startPoint, length));
+        
 
-                startPoint = initialiseString.IndexOf(seatsString, searchStartPoint) + seatsString.Length;
-                searchStartPoint = startPoint;
-                length = initialiseString.IndexOf(lengthString, searchStartPoint) - startPoint;
-                if(length < 0)
+        private static int[] getValuesFromString(string someString)
+        {
+            if (someString.Contains("Length"))
+            {
+                someString = someString.Substring(someString.IndexOf("Length:"));
+            }            
+            string[] stringValues = someString.Split(splitStrings, StringSplitOptions.RemoveEmptyEntries);
+            int[] intvalues = new int[stringValues.Count()];
+            for (int i = 0; i < stringValues.Count(); i++)
+            {
+                intvalues[i] = Convert.ToInt32(stringValues[i]);
+            }
+            return intvalues;
+        }
+
+        public static int[] GetSeatsTaken(string someString)
+        {
+            return getValuesFromString(someString);
+        }
+
+        public static int[,] GetUnitInfo(string someString)
+        {
+            int[] values = getValuesFromString(someString);
+            int[,] unitInfo = new int[values.Count() / 2, 2];
+            for (int i = 0; i < values.Count()/2 ; i++)
+            {
+                for (int ii = 0; ii < 2; ii++)
                 {
-                    length = initialiseString.Length - startPoint;
+                    unitInfo[i, ii] = values[2 * i + ii];
                 }
-                int seatAmount = Convert.ToInt32(initialiseString.Substring(startPoint, length));
-                unitInfo.Add(new int[2] { unitLength, seatAmount });
             }
             return unitInfo;
         }
