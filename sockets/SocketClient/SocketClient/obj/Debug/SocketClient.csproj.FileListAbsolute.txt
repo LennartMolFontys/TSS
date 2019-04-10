@@ -26,3 +26,10 @@ C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\Sock
 C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
 C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.exe
 C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe.config
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.pdb
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csprojAssemblyReference.cache
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.exe
+D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
