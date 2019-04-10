@@ -11,6 +11,8 @@ int seatsAvailable;
 int address = 0;
 bool isConnected = false;
 String addressMessage;
+int maxNumberOfSeats = 255;
+int lengthOfTrain = 7;
 
 void setup() {
   Serial.begin(9600);
@@ -29,12 +31,13 @@ void loop() {
     addressBus.print(address + 1);
     addressBus.println("%");
   }
-  seatsAvailable = analogRead(potPin);
+  seatsAvailable = map(analogRead(potPin), 0, 1023, 0, 255);
 }
 
 void sendSeats() {
-  Wire.write(seatsAvailable / 256);
   Wire.write(seatsAvailable);
+  Wire.write(maxNumberOfSeats);
+  Wire.write(lengthOfTrain);
   Serial.println(seatsAvailable);
 }
 
