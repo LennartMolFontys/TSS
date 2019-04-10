@@ -14,14 +14,14 @@ namespace Platform
     public partial class Form1 : Form
     {
         private PlatForm platForm = new PlatForm();
-        private Display display = new Display(4);
+        private Display display = new Display(7);
 
         public Form1()
         {
             InitializeComponent();
             try
             {
-                platForm.Connect("145.93.61.189", 8888);
+                //platForm.Connect("145.93.61.189", 8888);
                 display.Connect();
             }
             catch (InvalidOperationException Exception)
@@ -48,8 +48,9 @@ namespace Platform
 
         private void TreinInfoBtn_Click(object sender, EventArgs e)
         {
-               string test = platForm.GetTrainInfo();         
-               MessageBox.Show(test);
+            platForm.GetTrainInfo();   
+            platForm.GetSeatInfo();
+            display.Send(platForm.send());
         }
     }
 }

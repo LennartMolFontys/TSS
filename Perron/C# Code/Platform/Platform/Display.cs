@@ -27,12 +27,12 @@ namespace Platform
                 serialPort.Open();
                 connected = true;
             }
-            /*catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
                 connected = false;
                 serialPort.Close();
                 throw new UnauthorizedAccessException("The COM-Port is already in use");
-            }*/
+            }
             catch (ArgumentOutOfRangeException)
             {
                 connected = false;

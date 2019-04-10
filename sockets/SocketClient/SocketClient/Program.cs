@@ -42,17 +42,16 @@ namespace SocketClient
                         Console.WriteLine(incomingMessage);
                     }
 
-                    /*trainData = ReadMessage();   
+                    trainData = ReadMessage();   
                     string message = serial.ReadMessages();
                     if(message != null)
                     {
                         trainData = message;
                     }
-                    Console.WriteLine(trainData);*/
+                    Console.WriteLine(trainData);
 
                     if (incomingMessage.Contains("Initialize"))
                     {
-                        serial.Send("GetUnitInfo");
                         trainData = ReadMessage();
                         byte[] data = Encoding.ASCII.GetBytes(trainData);
                         stream.Write(data, 0, data.Length);
@@ -60,7 +59,6 @@ namespace SocketClient
                     }
                     else if(incomingMessage.Contains("SeatInfo"))
                     {
-                        serial.Send("GetUnitInfo");
                         trainData = ReadMessage();
                         byte[] data = Encoding.ASCII.GetBytes(trainData);
                         stream.Write(data, 0, data.Length);

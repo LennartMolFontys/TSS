@@ -9,10 +9,12 @@ namespace Platform
     public class PlatForm
     {
         public int TrainID { get; private set; }
-        private string trainInfo = "";
+        public string trainInfo { get; private set; }
         private string seatInfo = "";
         public Train train { get; private set; }
-
+        private int[,] UnitInfo;
+        private int[] SeatsTaken;
+        private int[] freeSeats;
         private int trainUnits = 0;
 
 
@@ -24,33 +26,62 @@ namespace Platform
             trainInfo = string.Empty;
         }
 
-        public void Add(int trainID)
+        private void Add(int trainID)
         {
             train = new Train(trainID);
+            for(int i = 0; i < trainUnits; i ++)
+            {
+                train.Add(UnitInfo[i, 0], UnitInfo[i, 1]);
+            }
         }
 
-        public string GetTrainInfo()
+
+        public void GetTrainInfo() // Add this for test (string test)
         {
-            if(netWork.Conneted)
-            {
-               trainInfo = netWork.Getinfo("Initialize");
-            }
-            return trainInfo;
+
+           trainInfo = netWork.Getinfo("Initialize"); //"ID:5UnitAmount: Length: 4TotalSeats: 5Length: 3TotalSeats: 9";  // Add this to test trainInfo =  test;
+           TrainID = StringSplitter.GetTrainId(trainInfo);
+           trainUnits = StringSplitter.GetUnitAmount(trainInfo);
+           UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
+           Add(TrainID);
         }
 
-        public string GetSeatInfo()
+        public void GetSeatInfo()
         {
-            if (netWork.Conneted)
+            seatInfo = netWork.Getinfo("SeatInfo"); //"SeatsTaken:3SeatsTaken:3";
+            SeatsTaken = StringSplitter.GetSeatsTaken(seatInfo);
+            FreeSeats();
+        }
+
+        private void FreeSeats()
+        {
+            freeSeats = new int[trainUnits];
+            for(int i = 0; i < trainUnits; i++)
             {
-                 seatInfo = netWork.Getinfo("SeatInfo");
+                freeSeats[i] = train.trainUnits[i].GetFreeSeats(SeatsTaken[i]);
             }
-            return seatInfo;
         }
 
         public void Connect(string NetworkIpAdress, int NetWorkPort)
         {
             netWork = new NetWork(NetworkIpAdress,NetWorkPort);
             netWork.Connect(); 
+        }
+
+        public string send()
+        {
+            string DisplaysString = "";
+            for(int i = 0; i < freeSeats.Length; i++)
+            {
+                string seat = freeSeats[i].ToString();
+                while (seat.Length < 4)
+                {
+                    seat = "0" + seat;
+                }
+                DisplaysString += seat;
+            }
+            
+            return DisplaysString.ToString();
         }
     }
 }
