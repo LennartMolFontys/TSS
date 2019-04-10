@@ -54,7 +54,7 @@ namespace Platform
 
             // Get Answer Train
             int num = Stream.Read(bytes, 0, bytes.Length);
-            string info = ASCIIEncoding.ASCII.GetString(bytes, 0, bytes.Length);
+            string info = Encoding.ASCII.GetString(bytes, 0, num);
 
             return info;
         }

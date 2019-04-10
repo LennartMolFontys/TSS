@@ -42,6 +42,7 @@
             this.Unit7Lb = new System.Windows.Forms.Label();
             this.Unit8Lb = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 71);
+            this.label1.Location = new System.Drawing.Point(33, 72);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 2;
@@ -163,12 +164,23 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Get train Info:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(578, 35);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(838, 238);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Unit8Lb);
             this.Controls.Add(this.Unit7Lb);
@@ -206,6 +218,7 @@
         private System.Windows.Forms.Label Unit7Lb;
         private System.Windows.Forms.Label Unit8Lb;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

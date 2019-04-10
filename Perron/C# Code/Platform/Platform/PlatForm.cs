@@ -14,8 +14,8 @@ namespace Platform
         public Train train { get; private set; }
         private int[,] UnitInfo;
         private int[] SeatsTaken;
-        private int[] freeSeats;
-        private int trainUnits = 0;
+        public int[] freeSeats { get; private set; }
+        public int trainUnits { get; private set; }
 
 
         private NetWork netWork;
@@ -44,6 +44,7 @@ namespace Platform
            trainUnits = StringSplitter.GetUnitAmount(trainInfo);
            UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
            Add(TrainID);
+
         }
 
         public void GetSeatInfo()
