@@ -97,7 +97,7 @@ namespace SocketClient
                     initializeInfo = initializeInfo + "Length:" + stringValues[i*4-1] + "TotalSeats:" + stringValues[i*3-1] ;
                     formatInt += 2;
                 }
-                initializeInfo = initializeInfo + "\n";
+                initializeInfo = initializeInfo + "\n"; 
             }
 
         }
