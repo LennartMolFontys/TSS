@@ -20,10 +20,9 @@ namespace stringSplitter
         private void button1_Click(object sender, EventArgs e)
         {
             string initialiseString = "ID:2365UnitAmount:3Length:3TotalSeats:30Length:5TotalSeats:30Length:6TotalSeats:30";
-            label1.Text = StringSplitter.GetTrainId(initialiseString).ToString();
-            int[,] treininfo = StringSplitter.getUnitInfo(initialiseString);
+            try { label1.Text = StringSplitter.GetTrainId(initialiseString).ToString(); } catch(FormatException exception) { MessageBox.Show(exception.Message); }
+            int[,] treininfo = StringSplitter.GetUnitInfo(initialiseString);
             MessageBox.Show(StringSplitter.GetUnitAmount(initialiseString).ToString());
-            StringSplitter.
         }
     }
 }

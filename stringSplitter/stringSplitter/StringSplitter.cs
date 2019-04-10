@@ -8,54 +8,73 @@ namespace stringSplitter
 {
     static class StringSplitter
     {
-        public static string InitialiseFormat { get; } = "ID:<value>UnitAmount:<value>Length:<value>TotalSeats:<value><value>Length:<value>TotalSeats:<value>...";
-        public static string SeatInfoFormat { get; } = "SeatsTaken:<value>SeatsTaken:<value>...";
+        public static string InitializeFormat { get; } = "ID:<value>UnitAmount:<value>Length:<value>TotalSeats:<value><value>Length:<value>TotalSeats:<value>...";
+        public static string SeatOccupationFormat { get; } = "SeatsTaken:<value>SeatsTaken:<value>...";
         private static string[] splitStrings = new string[] { "Length:", "TotalSeats:", "SeatsTaken:" };
 
 
         public static int GetTrainId(string initialiseString)
         {
-            string id = "ID:";
-            int startPoint = initialiseString.IndexOf(id) + id.Length;
-            int length = initialiseString.IndexOf("UnitAmount") - startPoint;
-            int trainId = Convert.ToInt32(initialiseString.Substring(startPoint, length));
-            return trainId;
+            try
+            {
+                int id = getValueBetweenStrings(initialiseString, "ID:", "UnitAmount:");
+                return id;
+            }
+            catch(FormatException)
+            {
+                throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + initialiseString);
+            }
         }
         
         public static int GetUnitAmount(string initialiseString)
         {
-            string unit = "UnitAmount:";
-            int startPoint = initialiseString.IndexOf(unit) + unit.Length;
-            int length = initialiseString.IndexOf("Length") - startPoint;
-            int unitAmount = Convert.ToInt32(initialiseString.Substring(startPoint, length));
-            return unitAmount;
+            try
+            {
+                int unitAmount = getValueBetweenStrings(initialiseString, "UnitAmount:", "Length:");
+                return unitAmount;
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + initialiseString);
+            }
+        }
+
+        private static int getValueBetweenStrings(string someString, string header, string footer)
+        {
+            int startPoint = someString.IndexOf(header) + header.Length;
+            int length = someString.IndexOf(footer) - startPoint;
+            if(!someString.Contains(header) || !someString.Contains(footer))
+            {
+                throw new FormatException();
+            }
+            return Convert.ToInt32(someString.Substring(startPoint, length));
         }
 
         
-
-        private static int[] getValuesFromString(string someString)
-        {
-            if (someString.Contains("Length"))
-            {
-                someString = someString.Substring(someString.IndexOf("Length:"));
-            }            
-            string[] stringValues = someString.Split(splitStrings, StringSplitOptions.RemoveEmptyEntries);
-            int[] intvalues = new int[stringValues.Count()];
-            for (int i = 0; i < stringValues.Count(); i++)
-            {
-                intvalues[i] = Convert.ToInt32(stringValues[i]);
-            }
-            return intvalues;
-        }
-
         public static int[] GetSeatsTaken(string someString)
         {
-            return getValuesFromString(someString);
+            try
+            {
+                return getValuesFromString(someString, splitStrings);
+            }
+            catch(FormatException)
+            {
+                throw new FormatException("Expected: " + SeatOccupationFormat + "\ngot: " + someString);
+            }
         }
 
         public static int[,] GetUnitInfo(string someString)
         {
-            int[] values = getValuesFromString(someString);
+            someString = someString.Substring(someString.IndexOf("Length:"));
+            int[] values;
+            try
+            {
+                values = getValuesFromString(someString, splitStrings);
+            }
+            catch(FormatException)
+            {
+                throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + someString);
+            }
             int[,] unitInfo = new int[values.Count() / 2, 2];
             for (int i = 0; i < values.Count()/2 ; i++)
             {
@@ -65,6 +84,32 @@ namespace stringSplitter
                 }
             }
             return unitInfo;
+        }
+
+        private static int[] getValuesFromString(string someString, string[] headerStrings)
+        {
+            try
+            {
+                string[] stringValues = someString.Split(headerStrings, StringSplitOptions.RemoveEmptyEntries);
+                int[] intvalues = new int[stringValues.Count()];
+                for (int i = 0; i < stringValues.Count(); i++)
+                {
+                    intvalues[i] = Convert.ToInt32(stringValues[i]);
+                }
+                return intvalues;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new FormatException();
+            }
+            catch (OverflowException)
+            {
+                throw new FormatException();
+            }
+            catch (FormatException e)
+            {
+                throw e;
+            }
         }
     }
 }
