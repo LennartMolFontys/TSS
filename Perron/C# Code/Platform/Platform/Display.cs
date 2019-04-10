@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
+using System.IO;
 
 namespace Platform
 {
@@ -26,10 +27,23 @@ namespace Platform
                 serialPort.Open();
                 connected = true;
             }
-            catch
+            /*catch (UnauthorizedAccessException)
             {
                 connected = false;
                 serialPort.Close();
+                throw new UnauthorizedAccessException("The COM-Port is already in use");
+            }*/
+            catch (ArgumentOutOfRangeException)
+            {
+                connected = false;
+                serialPort.Close();
+                throw new ArgumentOutOfRangeException("The Baundrate or the Port name are Incorrect");
+            }
+            catch (IOException)
+            {
+                connected = false;
+                serialPort.Close();
+                throw new IOException("The Comport is Incorrect");
             }
 
         }

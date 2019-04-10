@@ -18,11 +18,10 @@ namespace Platform
 
         private NetWork netWork;
         
-        public PlatForm(string NetworkIpAdress , int  NetWorkPort)
+        public PlatForm()
         {
             TrainID = 0;
             trainInfo = string.Empty;
-            netWork = new NetWork(NetworkIpAdress, NetWorkPort);
         }
 
         public void Add(int trainID)
@@ -30,23 +29,28 @@ namespace Platform
             train = new Train(trainID);
         }
 
-        public void GetTrainInfo()
+        public string GetTrainInfo()
         {
             if(netWork.Conneted)
             {
                trainInfo = netWork.Getinfo("Initialize");
             }
+            return trainInfo;
         }
 
-        public void GetSeatInfo()
+        public string GetSeatInfo()
         {
             if (netWork.Conneted)
             {
-                 seatInfo = netWork.Getinfo("Send seat info");
+                 seatInfo = netWork.Getinfo("SeatInfo");
             }
+            return seatInfo;
         }
 
- 
-
+        public void Connect(string NetworkIpAdress, int NetWorkPort)
+        {
+            netWork = new NetWork(NetworkIpAdress,NetWorkPort);
+            netWork.Connect(); 
+        }
     }
 }
