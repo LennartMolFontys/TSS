@@ -17,12 +17,10 @@ namespace Platform
             trainUnits = new List<TrainUnit>();
         }
 
-        public void Add(TrainUnit trainUnit)
+        public void Add(int lenght, int seatsTotal)
         {
-            if(trainUnit != null)
-            {
-                trainUnits.Add(trainUnit);
-            }          
+            TrainUnit unit = new TrainUnit(lenght, seatsTotal);
+            trainUnits.Add(unit);                      
         }
 
         public void Remove(int Unit)

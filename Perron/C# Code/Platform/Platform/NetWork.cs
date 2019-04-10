@@ -24,7 +24,6 @@ namespace Platform
         {
             IPadress = ipAdress;
             Port = port;
-            
         }
 
         public void Connect()
@@ -39,10 +38,12 @@ namespace Platform
                 Stream = Train.GetStream();
                 Conneted = true;
             }
-            catch
+            catch (InvalidOperationException)
             {
-                Conneted = false; // exception handling toepassen
+                Conneted = false;
+                throw new InvalidOperationException("Failed to Connect to Host");
             }
+            
         }
 
         public string Getinfo (string send)

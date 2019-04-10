@@ -29,7 +29,7 @@ namespace UnitTestProject1
             int TotalSeats = 10;
 
             // set
-            test.Add(new TrainUnit(lenght, TotalSeats));
+            test.Add(lenght, TotalSeats);
 
             // assert
             Assert.AreEqual(1, test.trainUnits.Count);
@@ -44,8 +44,8 @@ namespace UnitTestProject1
             Train test = test = new Train(1);
             int lenght = 5;
             int TotalSeats = 10;
-            test.Add(new TrainUnit(lenght, TotalSeats));
-            test.Add(new TrainUnit(lenght, 11));
+            test.Add(lenght, TotalSeats);
+            test.Add(lenght, 11);
 
             // set
             test.Remove(1);

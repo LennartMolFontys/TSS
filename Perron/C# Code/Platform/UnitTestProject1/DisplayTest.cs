@@ -36,6 +36,7 @@ namespace UnitTestProject1
 
             // assert
             Assert.AreEqual(true, display.connected);
+            display.CloseSerialPort();
         }
 
         [TestMethod]

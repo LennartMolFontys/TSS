@@ -30,41 +30,40 @@ namespace SocketClient
                 Console.WriteLine("Connected!");
                 NetworkStream stream = clientSock.GetStream();
 
-                serial = new SerialMessenger("COM8", 9600, '#', '%');
+                serial = new SerialMessenger("COM4", 9600, '#', '%');
                 serial.Connect();
 
                 while (sendLine != "quit")
                 {
-                    /*trainData = ReadMessage();   
+                    if (stream.DataAvailable == true)
+                    {
+                        int num = stream.Read(bytes, 0, bytes.Length);
+                        incomingMessage = Encoding.ASCII.GetString(bytes, 0, num);
+                        Console.WriteLine(incomingMessage);
+                    }
+
+                    trainData = ReadMessage();   
                     string message = serial.ReadMessages();
                     if(message != null)
                     {
                         trainData = message;
                     }
-                    Console.WriteLine(trainData);*/
+                    Console.WriteLine(trainData);
 
                     if (incomingMessage.Contains("Initialize"))
                     {
-                        serial.Send("GetUnitInfo");
                         trainData = ReadMessage();
                         byte[] data = Encoding.ASCII.GetBytes(trainData);
                         stream.Write(data, 0, data.Length);
+                        
                     }
                     else if(incomingMessage.Contains("SeatInfo"))
                     {
-                        serial.Send("GetUnitInfo");
                         trainData = ReadMessage();
                         byte[] data = Encoding.ASCII.GetBytes(trainData);
                         stream.Write(data, 0, data.Length);
                     }
-
-                    if (stream.DataAvailable == true)
-                    {
-                        int num = stream.Read(bytes, 0, bytes.Length);
-                        incomingMessage = Encoding.ASCII.GetString(bytes, 0, num);
-                        Console.WriteLine(incomingMessage); 
-                    }
-                    
+                    incomingMessage = "";                   
                 }
                 serial.Disconnect();
                 clientSock.Close();

@@ -53,6 +53,7 @@
             this.TreinInfoBtn.TabIndex = 0;
             this.TreinInfoBtn.Text = "Train Info";
             this.TreinInfoBtn.UseVisualStyleBackColor = true;
+            this.TreinInfoBtn.Click += new System.EventHandler(this.TreinInfoBtn_Click);
             // 
             // pictureBox1
             // 
