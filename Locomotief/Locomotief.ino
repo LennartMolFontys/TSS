@@ -10,7 +10,7 @@
 
 SoftwareSerial addressBus(addressBusRX, addressBusTX);
 
-int state = idle;
+int state = printSeatState;
 int numberOfCarriages = 1;
 int currentCarriage = 1;
 
@@ -41,10 +41,8 @@ void loop() {
     case printSeatState:
       if (currentCarriage == 1) {
         Serial.println("");
-        Serial.print("[Aantal: ");
-        Serial.print(numberOfCarriages);
-        Serial.print("]");
       }
+      
       if (!requestSeats(currentCarriage)) {
         currentCarriage = 1;
       }
@@ -59,7 +57,7 @@ bool requestSeats(int Carriage)
 {
   Wire.requestFrom(Carriage, 3);
   if (Wire.available()) {
-    Serial.print(" [");
+    Serial.print("[");
     Serial.print(Carriage);
     Serial.print("] [");
     Serial.print(Wire.read());
@@ -67,7 +65,7 @@ bool requestSeats(int Carriage)
     Serial.print(Wire.read());
     Serial.print("] [");
     Serial.print(Wire.read());
-    Serial.print("]");
+    Serial.print("] ");
     return true;
   }
   else {
@@ -93,5 +91,5 @@ void ReadSerial()
 
 void SerialPrintInitializeString()
 {
-  
+
 }
