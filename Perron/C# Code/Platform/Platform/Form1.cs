@@ -21,9 +21,9 @@ namespace Platform
         {
             InitializeComponent();
             AddLAbels();
-           /* try
+            try
             {
-                platForm.Connect("145.93.61.189", 8888);
+                platForm.Connect("145.93.40.170", 8888);
                 display.Connect();
             }
             catch (InvalidOperationException Exception)
@@ -45,13 +45,12 @@ namespace Platform
             {
                 MessageBox.Show(Exception.Message);
                 Environment.Exit(1);
-            }*/
+            }
         }
 
         private void TreinInfoBtn_Click(object sender, EventArgs e)
         {
             platForm.GetTrainInfo();
-            platForm.GetSeatInfo();
             idLabel.Text = platForm.TrainID.ToString();
             LabelFiller();
            // display.Send(platForm.send());
@@ -61,6 +60,8 @@ namespace Platform
         private void button1_Click(object sender, EventArgs e)
         {
             platForm.GetSeatInfo();
+            LabelFiller();
+            display.Send(platForm.send());
         }
 
         private void LabelFiller()

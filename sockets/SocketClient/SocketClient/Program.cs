@@ -79,23 +79,23 @@ namespace SocketClient
         public static void ReadMessage()
         {
             string message = serial.ReadMessages();
+            
             if (message != null || message != string.Empty)
             {
                 string[] stringValues = message.Split(new string[] { "[", "] [", "]" }, StringSplitOptions.RemoveEmptyEntries);
                 StringBuilder sb = new StringBuilder();
                 seatInfo = "";
-                for (int i = 1; i < stringValues.Count(); i +=4)
+                for (int i = 1; i < stringValues.Count()-3; i +=4)
                 {
+                    sb.Clear();
                     sb.AppendFormat("SeatsTaken:{0}", stringValues[i]);
                     seatInfo += sb;
                 }
                 int unitAmount = stringValues.Count() / 4;
                 initializeInfo = "ID:" + trainID.ToString() + "UnitAmount:" + unitAmount.ToString();
-                int formatInt = 0;
                 for (int i = 1; i <= unitAmount; i++)
                 {
-                    initializeInfo = initializeInfo + "Length:" + stringValues[i*4-1] + "TotalSeats:" + stringValues[i*3-1] ;
-                    formatInt += 2;
+                    initializeInfo = initializeInfo + "Length:" + stringValues[i*4-1] + "TotalSeats:" + stringValues[i*4-2] ;
                 }
 
                 initializeInfo = initializeInfo + "\n";
