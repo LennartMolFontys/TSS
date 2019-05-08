@@ -27,28 +27,36 @@ namespace Train
 
         private void AddSeats(int seats, List<Seat> list)
         {
-            for(int i = 0; i < seats; i++)
+            if(seats >0 && list != null)
             {
-                list.Add(new Seat(false));
+                for (int i = 0; i < seats; i++)
+                {
+                    list.Add(new Seat(false));
+                }
             }
+
         }
 
         public override void SetSeatTaken(int[] index, List<string> list)
         {
-            for(int i = 0; i < index.Length; i++)
+            if(index != null && list !=null)
             {
-                if (index[i] > 100)
+                for (int i = 0; i < index.Length; i++)
                 {
-                    int indexer = index[i] - 100;
-                    TopSeats[indexer].SetTaken();
-                    list.Add(TakenSeat = string.Format("Taken Seat:  {0} on Top Floor", indexer.ToString()));
-                }
-                else
-                {
-                    BottomSeats[index[i]].SetTaken();
-                    list.Add(TakenSeat = string.Format("Taken Seat:  {0} on Botton Floor", index[i].ToString()));
+                    if (index[i] > 100)
+                    {
+                        int indexer = index[i] - 100;
+                        TopSeats[indexer].SetTaken();
+                        list.Add(TakenSeat = string.Format("Taken Seat:  {0} on Top Floor", indexer.ToString()));
+                    }
+                    else
+                    {
+                        BottomSeats[index[i]].SetTaken();
+                        list.Add(TakenSeat = string.Format("Taken Seat:  {0} on Botton Floor", index[i].ToString()));
+                    }
                 }
             }
+
         }
 
         public override int GetFreeSeats()

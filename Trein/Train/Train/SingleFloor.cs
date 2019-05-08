@@ -27,11 +27,15 @@ namespace Train
 
         public override void SetSeatTaken(int[] index, List<string> list)
         {
-            for(int i = 0; i < index.Length; i++)
+            if(index !=null && list !=null)
             {
-                Seats[index[i]].SetTaken();
-                list.Add(string.Format("Taken Seat: {0}", index[i].ToString()));
+                for (int i = 0; i < index.Length; i++)
+                {
+                    Seats[index[i]].SetTaken();
+                    list.Add(string.Format("Taken Seat: {0}", index[i].ToString()));
+                }
             }
+
 
         }
 
