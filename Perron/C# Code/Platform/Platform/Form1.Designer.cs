@@ -42,7 +42,6 @@
             this.Unit7Lb = new System.Windows.Forms.Label();
             this.Unit8Lb = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,8 +59,12 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+
+            this.pictureBox1.Location = new System.Drawing.Point(20, 99);
+
             this.pictureBox1.Location = new System.Drawing.Point(20, 84);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(591, 103);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -71,8 +74,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
+
+            this.label1.Location = new System.Drawing.Point(17, 75);
+
             this.label1.Location = new System.Drawing.Point(25, 58);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 2;
@@ -81,6 +88,9 @@
             // idLabel
             // 
             this.idLabel.AutoSize = true;
+
+            this.idLabel.Location = new System.Drawing.Point(85, 75);
+
             this.idLabel.Location = new System.Drawing.Point(71, 84);
             this.idLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.idLabel.Name = "idLabel";
@@ -177,6 +187,7 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Connect to new train:";
             // 
+
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(297, 31);
@@ -188,13 +199,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+
+            this.ClientSize = new System.Drawing.Size(838, 238);
+
             this.ClientSize = new System.Drawing.Size(628, 193);
             this.Controls.Add(this.button1);
+
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Unit8Lb);
             this.Controls.Add(this.Unit7Lb);
@@ -233,7 +249,6 @@
         private System.Windows.Forms.Label Unit7Lb;
         private System.Windows.Forms.Label Unit8Lb;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
     }
 }
 

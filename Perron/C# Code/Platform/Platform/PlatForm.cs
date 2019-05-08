@@ -39,8 +39,8 @@ namespace Platform
         public void GetTrainInfo() // Add this for test (string test)
         {
 
-           trainInfo = netWork.Getinfo("Initialize"); //"ID:5UnitAmount: Length: 4TotalSeats: 5Length: 3TotalSeats: 9";  // Add this to test trainInfo =  test;
-           TrainID = StringSplitter.GetTrainId(trainInfo);
+           trainInfo =  netWork.Getinfo("Initialize"); //"ID:5UnitAmount:2 Length: 4TotalSeats: 5Length: 3TotalSeats: 9";  // Add this to test trainInfo =  test;
+            TrainID = StringSplitter.GetTrainId(trainInfo);
            trainUnits = StringSplitter.GetUnitAmount(trainInfo);
            UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
            Add(TrainID);

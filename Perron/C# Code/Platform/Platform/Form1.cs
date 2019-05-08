@@ -15,12 +15,12 @@ namespace Platform
     {
         private PlatForm platForm = new PlatForm();
         private Display display = new Display(7);
-        private Label[] labels;
+        private List<Label> labels = new List<Label>();
 
         public Form1()
         {
             InitializeComponent();
-           labels = new Label[]{ Unit1LB, Unit2LB, Unit3Lb, Unit4Lb, Unit5Lb, Unit6Lb, Unit7Lb, Unit8Lb };
+            AddLAbels();
             try
             {
                 platForm.Connect("145.93.40.170", 8888);
@@ -52,6 +52,8 @@ namespace Platform
         {
             platForm.GetTrainInfo();
             idLabel.Text = platForm.TrainID.ToString();
+            LabelFiller();
+           // display.Send(platForm.send());
 
         }
 
@@ -63,12 +65,24 @@ namespace Platform
         }
 
         private void LabelFiller()
-         {
-             for(int i = 0; i < platForm.trainUnits; i++)
-             {
-                 labels[i].Text = platForm.freeSeats[i].ToString();
-             }
-         }
+        {
+            for (int i = 0; i < platForm.trainUnits; i++)
+            {
+                labels[i].Text = platForm.freeSeats[i].ToString();
+            }
+        }     
+        
+        private void AddLAbels()
+        {
+            labels.Add(Unit1LB);
+            labels.Add(Unit2LB);
+            labels.Add(Unit3Lb);
+            labels.Add(Unit4Lb);
+            labels.Add(Unit5Lb);
+            labels.Add(Unit6Lb);
+            labels.Add(Unit7Lb);
+            labels.Add(Unit8Lb);
+        }
 
     }
 }
