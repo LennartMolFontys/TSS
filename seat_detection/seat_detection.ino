@@ -9,8 +9,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   CheckSeats();
-  delay(2000);
   printSeats(); 
+  delay(2000);
 }
 
 void printSeats() {
