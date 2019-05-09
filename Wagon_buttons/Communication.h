@@ -8,9 +8,14 @@
 #define addressBusRX 5
 #define addressBusTX 6
 
+
+void SetUpCommunication();
+
 void sendSeats();
 
 int readAddress();
+
+int sendAddress(int address);
 
 void Connect(int connectToAddress);
 
