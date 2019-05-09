@@ -15,19 +15,16 @@ namespace SocketClient
         private static string seatInfo = "";
         public static SerialMessenger serial;
         
-
-
         static void Main(string[] args)
         {
             const int port = 8888;
             String sendLine = "";
             byte[] bytes = new byte[1024];
             string incomingMessage = "";
-            
-          
+                     
             try
             {
-                TcpClient clientSock = new TcpClient();
+               TcpClient clientSock = new TcpClient();
                 Console.WriteLine("give ipAdress to connect to");
                 IPAddress.TryParse(Console.ReadLine(), out IPAddress serverIP);
 
@@ -36,7 +33,7 @@ namespace SocketClient
                 Console.WriteLine("Connected!");
                 NetworkStream stream = clientSock.GetStream();
 
-                serial = new SerialMessenger("COM9", 9600, '#', '%');
+                serial = new SerialMessenger("COM7", 9600, '#', '%');
                 serial.Connect();
 
                 while (sendLine != "quit")

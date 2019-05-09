@@ -19,3 +19,10 @@ D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\Soc
 D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csproj.CoreCompileInputs.cache
 D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.exe
 D:\documenten\semester2\Proftaak\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.pdb
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.exe.config
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.exe
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\bin\Debug\SocketServer.pdb
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csprojAssemblyReference.cache
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.csproj.CoreCompileInputs.cache
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.exe
+C:\Users\jeffr\OneDrive - Office 365 Fontys\Semester 2\proftaak\TSS\sockets\SocketServer\SocketServer\obj\Debug\SocketServer.pdb

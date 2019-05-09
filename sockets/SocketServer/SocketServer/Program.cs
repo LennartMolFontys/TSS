@@ -20,7 +20,7 @@ namespace SocketServer
             string incomingMessage = "";
             try
             {
-                servSock = new TcpListener(IPAddress.Parse("145.93.172.248"), port);
+                servSock = new TcpListener(IPAddress.Parse("145.93.62.116"), port);
                 servSock.Start();
                 clientSock = new TcpClient();
                 Console.WriteLine("Waiting for the client to connect");

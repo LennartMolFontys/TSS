@@ -14,7 +14,7 @@ namespace Platform
     public partial class Form1 : Form
     {
         private PlatForm platForm = new PlatForm();
-        private Display display = new Display(7);
+       // private Display display = new Display(9);
         private List<Label> labels = new List<Label>();
 
         public Form1()
@@ -23,8 +23,8 @@ namespace Platform
             AddLAbels();
             try
             {
-                platForm.Connect("145.93.40.170", 8888);
-                display.Connect();
+                platForm.Connect("145.93.62.116", 8888);
+               // display.Connect();
             }
             catch (InvalidOperationException Exception)
             {
@@ -52,17 +52,12 @@ namespace Platform
         {
             platForm.GetTrainInfo();
             idLabel.Text = platForm.TrainID.ToString();
-            LabelFiller();
+            //LabelFiller();
            // display.Send(platForm.send());
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            platForm.GetSeatInfo();
-            LabelFiller();
-            display.Send(platForm.send());
-        }
+
 
         private void LabelFiller()
         {
@@ -70,8 +65,9 @@ namespace Platform
             {
                 labels[i].Text = platForm.freeSeats[i].ToString();
             }
-        }     
-        
+        }
+
+
         private void AddLAbels()
         {
             labels.Add(Unit1LB);
@@ -84,5 +80,11 @@ namespace Platform
             labels.Add(Unit8Lb);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            platForm.GetSeatInfo();
+            LabelFiller();
+            //display.Send(platForm.send());
+        }
     }
 }
