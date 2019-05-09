@@ -20,30 +20,13 @@ namespace Platform
 
         public void Connect()
         {
-            try
-            {
-                serialPort.BaudRate = 9600;
-                serialPort.PortName = "COM" + COM_Port.ToString();
-                serialPort.Open();
-                connected = true;
-            }
-            catch (UnauthorizedAccessException)
+            serialPort.BaudRate = 9600;
+            serialPort.PortName = "COM" + COM_Port.ToString();
+            serialPort.Open();
+            if (!serialPort.IsOpen)
             {
                 connected = false;
                 serialPort.Close();
-                throw new UnauthorizedAccessException("The COM-Port is already in use");
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                connected = false;
-                serialPort.Close();
-                throw new ArgumentOutOfRangeException("The Baundrate or the Port name are Incorrect");
-            }
-            catch (IOException)
-            {
-                connected = false;
-                serialPort.Close();
-                throw new IOException("The Comport is Incorrect");
             }
 
         }
@@ -59,7 +42,10 @@ namespace Platform
 
         public void Send(string info)
         {
-            serialPort.WriteLine("#" + info + "%");
+            if(!string.IsNullOrEmpty(info))
+            {
+                serialPort.WriteLine("#" + info + "%");
+            }
         }
     }
 }
