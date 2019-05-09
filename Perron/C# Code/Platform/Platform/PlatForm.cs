@@ -36,11 +36,11 @@ namespace Platform
         }
 
 
-        public void GetTrainInfo() // Add this for test (string test)
+        public void GetTrainInfo()
         {
 
-           trainInfo =  netWork.Getinfo("Initialize"); //"ID:5UnitAmount:2 Length: 4TotalSeats: 5Length: 3TotalSeats: 9";  // Add this to test trainInfo =  test;
-            TrainID = StringSplitter.GetTrainId(trainInfo);
+           trainInfo =  netWork.Getinfo("Initialize"); 
+           TrainID = StringSplitter.GetTrainId(trainInfo);
            trainUnits = StringSplitter.GetUnitAmount(trainInfo);
            UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
            Add(TrainID);
@@ -49,7 +49,7 @@ namespace Platform
 
         public void GetSeatInfo()
         {
-            seatInfo = netWork.Getinfo("SeatInfo"); //"SeatsTaken:3SeatsTaken:3";
+            seatInfo = netWork.Getinfo("SeatInfo");
             SeatsTaken = StringSplitter.GetSeatsTaken(seatInfo);
             FreeSeats();
         }
@@ -65,8 +65,11 @@ namespace Platform
 
         public void Connect(string NetworkIpAdress, int NetWorkPort)
         {
-            netWork = new NetWork(NetworkIpAdress,NetWorkPort);
-            netWork.Connect(); 
+            if(!string.IsNullOrEmpty(NetworkIpAdress) && NetWorkPort > 0)
+            {
+                netWork = new NetWork(NetworkIpAdress, NetWorkPort);
+                netWork.Connect();
+            }
         }
 
         public string send()

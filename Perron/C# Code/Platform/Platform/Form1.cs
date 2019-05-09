@@ -14,8 +14,9 @@ namespace Platform
     public partial class Form1 : Form
     {
         private PlatForm platForm = new PlatForm();
-       // private Display display = new Display(9);
+        private Display display = new Display(4);
         private List<Label> labels = new List<Label>();
+        bool initialize = false;
 
         public Form1()
         {
@@ -24,40 +25,30 @@ namespace Platform
             try
             {
                 platForm.Connect("145.93.62.116", 8888);
-               // display.Connect();
+                display.Connect();
             }
-            catch (InvalidOperationException Exception)
+            catch (InvalidOperationException)
             {
-                MessageBox.Show(Exception.Message);
+                MessageBox.Show("Failed to Connect to Host");
                 Environment.Exit(1);
             }
-            catch(UnauthorizedAccessException Exception)
+            catch(UnauthorizedAccessException)
             {
-                MessageBox.Show(Exception.Message);
+                MessageBox.Show("The COM-Port is already in use");
                 Environment.Exit(1);
             }
-            catch(ArgumentOutOfRangeException Exception)
+            catch(ArgumentOutOfRangeException)
             {
-                MessageBox.Show(Exception.Message);
+                MessageBox.Show("The Baundrate or the Port name are Incorrect");
                 Environment.Exit(1);
             }
-            catch(IOException Exception)
+            catch(IOException)
             {
-                MessageBox.Show(Exception.Message);
+                MessageBox.Show("The Comport is Incorrect");
                 Environment.Exit(1);
             }
+            timer1.Start();
         }
-
-        private void TreinInfoBtn_Click(object sender, EventArgs e)
-        {
-            platForm.GetTrainInfo();
-            idLabel.Text = platForm.TrainID.ToString();
-            //LabelFiller();
-           // display.Send(platForm.send());
-
-        }
-
-
 
         private void LabelFiller()
         {
@@ -80,11 +71,21 @@ namespace Platform
             labels.Add(Unit8Lb);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            platForm.GetSeatInfo();
-            LabelFiller();
-            //display.Send(platForm.send());
+            if(initialize == false)
+            {
+                platForm.GetTrainInfo();
+                idLabel.Text = platForm.TrainID.ToString();
+                initialize = true;
+            }
+            else
+            {
+                platForm.GetSeatInfo();
+                LabelFiller();
+                display.Send(platForm.send());
+            }
+
         }
     }
 }

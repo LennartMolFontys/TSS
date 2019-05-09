@@ -19,14 +19,22 @@ namespace Platform
 
         public void Add(int lenght, int seatsTotal)
         {
-            TrainUnit unit = new TrainUnit(lenght, seatsTotal);
-            trainUnits.Add(unit);                      
+            if(lenght > 0 && seatsTotal > 0)
+            {
+                TrainUnit unit = new TrainUnit(lenght, seatsTotal);
+                trainUnits.Add(unit);
+            }
+                     
         }
 
         public void Remove(int Unit)
         {
-            int index = Unit - 1;
-            trainUnits.Remove(trainUnits[index]);
+            if(Unit > 0)
+            {
+                int index = Unit - 1;
+                trainUnits.Remove(trainUnits[index]);
+            }
+
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Platform
             catch (InvalidOperationException)
             {
                 Conneted = false;
-                throw new InvalidOperationException("Failed to Connect to Host");
+                throw new InvalidOperationException();
             }
             
         }
