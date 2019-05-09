@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Train
 {
-    class Serial
+    public class Serial
     {
+
     }
 }
