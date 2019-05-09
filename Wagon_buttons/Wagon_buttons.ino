@@ -1,21 +1,13 @@
-#include <Wire.h>
-#include <SoftwareSerial.h>
 #include "SeatDetection.h"
 #include "Communication.h"
 
-#define addressBusRX 5
-#define addressBusTX 6
+int seatsasdf;
 
-SoftwareSerial addressBus(addressBusRX, addressBusTX);
-
-int seatsTaken;
 int address = 0;
 bool isConnected = false;
-int maxNumberOfSeats = 255;
-int lengthOfTrain = 7;
 
 void setup() {
-  Serial.begin(9600);
+  SetUpCommunication();
   SetUpSeatPins();
 }
 
@@ -28,11 +20,8 @@ void loop() {
     }
   }
   else {
-    addressBus.print("#");
-    addressBus.print(address + 1);
-    addressBus.println("%");
+    sendAddress(address + 1);
   }
   CheckSeats();
-  seatsTaken = GetTakenSeats();
-  Serial.println(seatsTaken);
+  seatsasdf = GetTakenSeats();
 }

@@ -2,9 +2,11 @@
 SoftwareSerial addressBus(addressBusRX, addressBusTX);
 
 String addressMessage = "";
-int address = 0;
+int seatsTaken;
+int maxNumberOfSeats = 255;
+int lengthOfTrain = 7;
 
-void sendSeats(int seatsTaken, int maxNumberOfSeats, int lengthOfTrain) {
+void sendSeats() {
   Wire.write(seatsTaken);
   Wire.write(maxNumberOfSeats);
   Wire.write(lengthOfTrain);
@@ -19,13 +21,19 @@ int readAddress() {
   }
   if (addressMessage.startsWith("#") && addressMessage.endsWith("%")) {
     addressMessage = addressMessage.substring(1, addressMessage.length() - 1);
-    address = addressMessage.toInt();
+    int address = addressMessage.toInt();
     addressMessage = "";
     return address;
   }
   else{
     return -1;
   }
+}
+
+int sendAddress(int address){
+    addressBus.print("#");
+    addressBus.print(address);
+    addressBus.println("%");
 }
 
 void Connect(int connectToAddress) {
