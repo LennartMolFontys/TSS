@@ -16,6 +16,9 @@ namespace Platform
         private int[] SeatsTaken;
         public int[] freeSeats { get; private set; }
         public int trainUnits { get; private set; }
+        private string OldSeatInfo = "";
+        public bool  UnitsChanged { get; private set; }
+        
 
 
         private NetWork netWork;
@@ -38,7 +41,7 @@ namespace Platform
 
         public void GetTrainInfo()
         {
-
+           UnitsChanged = false;
            trainInfo =  netWork.Getinfo("Initialize"); 
            TrainID = StringSplitter.GetTrainId(trainInfo);
            trainUnits = StringSplitter.GetUnitAmount(trainInfo);
@@ -50,7 +53,19 @@ namespace Platform
         public void GetSeatInfo()
         {
             seatInfo = netWork.Getinfo("SeatInfo");
+            if((OldSeatInfo.Length - 3) > seatInfo.Length)
+            {
+                UnitsChanged = true;
+                OldSeatInfo = seatInfo;
+                return;
+            }
+            else if((OldSeatInfo.Length + 3) < seatInfo.Length)
+            {
+                UnitsChanged = true;
+                OldSeatInfo = seatInfo;
+            }
             SeatsTaken = StringSplitter.GetSeatsTaken(seatInfo);
+            OldSeatInfo = seatInfo;
             FreeSeats();
         }
 

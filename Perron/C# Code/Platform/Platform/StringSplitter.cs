@@ -15,28 +15,38 @@ namespace Platform
 
         public static int GetTrainId(string initialiseString)
         {
-            try
+            int id = 0;
+            if(!string.IsNullOrEmpty(initialiseString))
             {
-                int id = getValueBetweenStrings(initialiseString, "ID:", "UnitAmount:");
-                return id;
+                try
+                {
+                    id = getValueBetweenStrings(initialiseString, "ID:", "UnitAmount:");
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + initialiseString);
+                }
             }
-            catch(FormatException)
-            {
-                throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + initialiseString);
-            }
+            return id;
         }
         
         public static int GetUnitAmount(string initialiseString)
         {
-            try
+            int unitAmount = 0;
+            if (!string.IsNullOrEmpty(initialiseString))
             {
-                int unitAmount = getValueBetweenStrings(initialiseString, "UnitAmount:", "Length:");
-                return unitAmount;
+                try
+                {
+                     unitAmount = getValueBetweenStrings(initialiseString, "UnitAmount:", "Length:");
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + initialiseString);
+                }
             }
-            catch (FormatException)
-            {
-                throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + initialiseString);
-            }
+
+            return unitAmount;
+
         }
 
         private static int getValueBetweenStrings(string someString, string header, string footer)

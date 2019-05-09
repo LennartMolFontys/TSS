@@ -73,7 +73,8 @@ namespace Platform
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(initialize == false)
+
+            if (initialize == false)
             {
                 platForm.GetTrainInfo();
                 idLabel.Text = platForm.TrainID.ToString();
@@ -82,10 +83,23 @@ namespace Platform
             else
             {
                 platForm.GetSeatInfo();
+                if (platForm.UnitsChanged == true)
+                {
+                    initialize = false;
+                    ResetLabels();
+                    return;
+                }
                 LabelFiller();
                 display.Send(platForm.send());
             }
 
+        }
+        private void ResetLabels()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                labels[i].Text = "0";
+            }
         }
     }
 }
