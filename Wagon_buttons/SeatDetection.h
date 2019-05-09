@@ -2,6 +2,7 @@
 #define SEAT_DETECTION_H
 #include <arduino.h>
 
+
 #define TAKEN true
 
 #define ROWS 4
