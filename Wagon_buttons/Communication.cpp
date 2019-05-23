@@ -30,7 +30,7 @@ int readAddress() {
   }
 }
 
-int sendAddress(int address){
+void sendAddress(int address){
     addressBus.print("#");
     addressBus.print(address);
     addressBus.println("%");

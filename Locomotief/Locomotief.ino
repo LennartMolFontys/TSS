@@ -1,95 +1,19 @@
-#include <Wire.h>
-#include <SoftwareSerial.h>
+#include "Communication.h"
 
-#define idle 0
-#define initializeState 1
-#define printSeatState 2
-
-#define addressBusRX 5
-#define addressBusTX 6
-
-SoftwareSerial addressBus(addressBusRX, addressBusTX);
-
-int state = printSeatState;
-int numberOfCarriages = 1;
 int currentCarriage = 1;
 
-String message;
-String fullMessage;
-
 void setup() {
-  addressBus.begin(9600);
-  Wire.begin();
-  Serial.begin(9600);
+  SetUpCommunication();
 }
 
 void loop() {
-  addressBus.println("#1%");
-  ReadSerial();
-  if (fullMessage == "Initialize") {
-    state = initializeState;
-    fullMessage = "";
+  if (currentCarriage == 1) {
+    NewMessage();
   }
-  switch (state) {
-    case idle:
-
-      break;
-    case initializeState:
-      SerialPrintInitializeString();
-      state = printSeatState;
-      break;
-    case printSeatState:
-      if (currentCarriage == 1) {
-        Serial.println("");
-      }
-      
-      if (!requestSeats(currentCarriage)) {
-        currentCarriage = 1;
-      }
-      else {
-        currentCarriage++;
-      }
-      break;
-  }
-}
-
-bool requestSeats(int Carriage)
-{
-  Wire.requestFrom(Carriage, 3);
-  if (Wire.available()) {
-    Serial.print("[");
-    Serial.print(Carriage);
-    Serial.print("] [");
-    Serial.print(Wire.read());
-    Serial.print("] [");
-    Serial.print(Wire.read());
-    Serial.print("] [");
-    Serial.print(Wire.read());
-    Serial.print("] ");
-    return true;
+  if (!RequestSeats(currentCarriage)) {
+    currentCarriage = 1;
   }
   else {
-    numberOfCarriages = Carriage - 1;
-    return false;
+    currentCarriage++;
   }
-}
-
-void ReadSerial()
-{
-  static String message = "";
-  if (Serial.available() > 0) {
-    char readChar = (char) Serial.read();
-    message = message + readChar;
-    message.trim();
-  }
-  if (message.startsWith("#") && message.endsWith("%")) {
-    message = message.substring(1, message.length() - 1);
-    fullMessage = message;
-    message = "";
-  }
-}
-
-void SerialPrintInitializeString()
-{
-
 }
