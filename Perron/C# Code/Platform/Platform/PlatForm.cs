@@ -18,14 +18,13 @@ namespace Platform
         public int trainUnits { get; private set; }
         private string OldSeatInfo = "";
         public bool  UnitsChanged { get; private set; }
-        
-
 
         private NetWork netWork;
         
         public PlatForm()
         {
             TrainID = 0;
+            trainUnits = 0;
             trainInfo = string.Empty;
         }
 
@@ -39,34 +38,39 @@ namespace Platform
         }
 
 
-        public void GetTrainInfo()
+        public void GetTrainInfo(string Info)
         {
-           UnitsChanged = false;
-           trainInfo =  netWork.Getinfo("Initialize"); 
-           TrainID = StringSplitter.GetTrainId(trainInfo);
-           trainUnits = StringSplitter.GetUnitAmount(trainInfo);
-           UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
-           Add(TrainID);
-
+            if (!string.IsNullOrEmpty(Info))
+            {
+                UnitsChanged = false;
+                trainInfo = Info;
+                TrainID = StringSplitter.GetTrainId(trainInfo);
+                trainUnits = StringSplitter.GetUnitAmount(trainInfo);
+                UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
+                Add(TrainID);
+            }
         }
 
-        public void GetSeatInfo()
+        public void GetSeatInfo(string info)
         {
-            seatInfo = netWork.Getinfo("SeatInfo");
-            if((OldSeatInfo.Length - 3) > seatInfo.Length)
+            if (!string.IsNullOrEmpty(info))
             {
-                UnitsChanged = true;
+                seatInfo = info;
+                if ((OldSeatInfo.Length - 3) > seatInfo.Length)
+                {
+                    UnitsChanged = true;
+                    OldSeatInfo = seatInfo;
+                    return;
+                }
+                else if ((OldSeatInfo.Length + 3) < seatInfo.Length)
+                {
+                    UnitsChanged = true;
+                    OldSeatInfo = seatInfo;
+                }
+                SeatsTaken = StringSplitter.GetSeatsTaken(seatInfo);
                 OldSeatInfo = seatInfo;
-                return;
+                FreeSeats();
             }
-            else if((OldSeatInfo.Length + 3) < seatInfo.Length)
-            {
-                UnitsChanged = true;
-                OldSeatInfo = seatInfo;
-            }
-            SeatsTaken = StringSplitter.GetSeatsTaken(seatInfo);
-            OldSeatInfo = seatInfo;
-            FreeSeats();
         }
 
         private void FreeSeats()
@@ -101,6 +105,16 @@ namespace Platform
             }
             
             return DisplaysString.ToString();
+        }
+
+        public string read(string Information)
+        {
+            if(!string.IsNullOrEmpty(Information))
+            {
+                return netWork.Getinfo(Information);
+            }
+
+            return "";
         }
     }
 }

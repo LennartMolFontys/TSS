@@ -24,7 +24,7 @@ namespace Platform
             AddLAbels();
             try
             {
-                platForm.Connect("145.93.62.116", 8888);
+                platForm.Connect("145.93.60.255", 8888);
                 display.Connect();
             }
             catch (InvalidOperationException)
@@ -76,13 +76,15 @@ namespace Platform
 
             if (initialize == false)
             {
-                platForm.GetTrainInfo();
+                string info = platForm.read("Initialize");
+                platForm.GetTrainInfo(info);
                 idLabel.Text = platForm.TrainID.ToString();
                 initialize = true;
             }
             else
             {
-                platForm.GetSeatInfo();
+                string info = platForm.read("SeatInfo");
+                platForm.GetSeatInfo(info);
                 if (platForm.UnitsChanged == true)
                 {
                     initialize = false;

@@ -13,6 +13,7 @@ namespace Platform
         private SerialPort serialPort = new SerialPort();
         public int COM_Port { get; private set; }
         public bool connected { get; private set; }
+
         public Display (int COM_Port)
         {
             this.COM_Port = COM_Port;

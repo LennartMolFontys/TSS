@@ -7,35 +7,95 @@ namespace UnitTestProject1
     [TestClass]
     public class PlatFormTest
     {
-        [TestMethod]
-        public void TestConstructor()
+        private PlatForm platForm;
+        private string TestInitString;
+        private string TestTaken;
+
+        [TestInitialize]
+        public void init()
         {
-            // arrange
-            PlatForm platform;
-
-            // set
-            platform = new PlatForm();
-
-            // Assert
-            Assert.AreEqual(0, platform.TrainID);
-            Assert.AreEqual(string.Empty, platform.trainInfo);     
+            platForm = new PlatForm();
+            TestInitString = "ID:5UnitAmount:2Length:4TotalSeats:5Length:3TotalSeats:9";
+            TestTaken = "SeatsTaken:3SeatsTaken:6";
         }
 
-        [TestMethod]// << see Comments at Method
-        public void TestGetTrainInfo()
+        [TestMethod]
+        public void TestConstructorCorrect()
         {
-            // arrange
-            PlatForm platform = new PlatForm();
-            string test = "ID:5UnitAmount:2Length:4TotalSeats:5Length:3TotalSeats:9";
+            // Assert
+            Assert.AreEqual(0, platForm.TrainID);
+            Assert.AreEqual(string.Empty, platForm.trainInfo);
+        }
 
+        [TestMethod]
+        public void TestConstructorInCorrect()
+        {
+            // Assert
+            Assert.AreNotEqual(1, platForm.TrainID);
+            Assert.AreNotEqual("HALLO", platForm.trainInfo);
+        }
+
+        [TestMethod]
+        public void TestGetTrainInfoSucces()
+        {
             // set
-            platform.GetTrainInfo(test);
+            platForm.GetTrainInfo(TestInitString);
 
             // Assert
-            Assert.AreEqual(5, platform.train.TrainId);
-            Assert.AreEqual(2, platform.train.trainUnits.Count);
-            Assert.AreEqual(4, platform.train.trainUnits[0].Length);
-            Assert.AreEqual(5, platform.train.trainUnits[0].SeatsTotal);
+            Assert.AreEqual(5, platForm.TrainID);
+            Assert.AreEqual(2, platForm.train.trainUnits.Count);
+            Assert.AreEqual(4, platForm.train.trainUnits[0].Length);
+            Assert.AreEqual(5, platForm.train.trainUnits[0].SeatsTotal);
+        }
+
+        [TestMethod]
+        public void TestGetTrainInfoFail()
+        {
+            // set
+            platForm.GetTrainInfo("");
+
+            // Assert
+            Assert.AreEqual(0, platForm.TrainID);
+            Assert.AreEqual(0, platForm.trainUnits);
+        }
+
+        [TestMethod]
+        public void TestGetSeatInfo()
+        {
+            //arrange
+            platForm.GetTrainInfo(TestInitString);
+           
+               
+            // set
+            platForm.GetSeatInfo(TestTaken);
+
+            //
+            Assert.AreEqual(2, platForm.freeSeats[0]);
+            Assert.AreEqual(3, platForm.freeSeats[1]);
+        }
+
+        [TestMethod]
+        public void TestGetSeatInfoFail()
+        {
+            // set
+            platForm.GetSeatInfo("");
+
+            // Assert
+            Assert.AreEqual(string.Empty, platForm.trainInfo);
+        }
+
+
+        [TestMethod]
+        public void SentToArduinoString()
+        {
+            //arrange
+            platForm.GetTrainInfo(TestInitString);
+            platForm.GetSeatInfo(TestTaken);
+
+            //set
+            string test = platForm.send();
+
+            Assert.AreEqual("00020003", test);
         }
     }
 }

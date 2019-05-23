@@ -26,15 +26,5 @@ namespace Platform
             }
                      
         }
-
-        public void Remove(int Unit)
-        {
-            if(Unit > 0)
-            {
-                int index = Unit - 1;
-                trainUnits.Remove(trainUnits[index]);
-            }
-
-        }
     }
 }
