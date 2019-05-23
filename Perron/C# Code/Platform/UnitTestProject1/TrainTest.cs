@@ -7,15 +7,17 @@ namespace UnitTestProject1
     [TestClass]
     public class TrainTest
     {
+        private Train test;
+
+        [TestInitialize]
+        public void init()
+        {
+            test = new Train(1);
+        }
+
         [TestMethod]
         public void TestConstrutor()
         {
-            // arrange
-            Train test;
-
-            // set
-            test = new Train(1);
-
             // assert
             Assert.AreEqual(1, test.TrainId);
         }
@@ -24,7 +26,6 @@ namespace UnitTestProject1
         public void AddTrainUnit()
         {
             // arrange
-            Train test = test = new Train(1);
             int lenght = 5;
             int TotalSeats = 10;
 
@@ -35,24 +36,6 @@ namespace UnitTestProject1
             Assert.AreEqual(1, test.trainUnits.Count);
             Assert.AreEqual(5, test.trainUnits[0].Length);
             Assert.AreEqual(10, test.trainUnits[0].SeatsTotal);
-        }
-
-        [TestMethod]
-        public void RemoveUnit()
-        {
-            // arrange
-            Train test = test = new Train(1);
-            int lenght = 5;
-            int TotalSeats = 10;
-            test.Add(lenght, TotalSeats);
-            test.Add(lenght, 11);
-
-            // set
-            test.Remove(1);
-
-            // assert
-            Assert.AreEqual(1, test.trainUnits.Count);
-            Assert.AreEqual(11, test.trainUnits[0].SeatsTotal);
         }
     }
 }
