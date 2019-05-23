@@ -24,7 +24,7 @@ namespace SocketClient
                      
             try
             {
-               TcpClient clientSock = new TcpClient();
+                TcpClient clientSock = new TcpClient();
                 Console.WriteLine("give ipAdress to connect to");
                 IPAddress.TryParse(Console.ReadLine(), out IPAddress serverIP);
 
@@ -33,7 +33,7 @@ namespace SocketClient
                 Console.WriteLine("Connected!");
                 NetworkStream stream = clientSock.GetStream();
 
-                serial = new SerialMessenger("COM7", 9600, '#', '%');
+                serial = new SerialMessenger("COM8", 9600, '#', '%');
                 serial.Connect();
 
                 while (sendLine != "quit")

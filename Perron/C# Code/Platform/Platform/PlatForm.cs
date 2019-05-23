@@ -18,8 +18,6 @@ namespace Platform
         public int trainUnits { get; private set; }
         private string OldSeatInfo = "";
         public bool  UnitsChanged { get; private set; }
-        
-
 
         private NetWork netWork;
         
@@ -39,10 +37,10 @@ namespace Platform
         }
 
 
-        public void GetTrainInfo()
+        public void GetTrainInfo(string Info)
         {
            UnitsChanged = false;
-           trainInfo =  netWork.Getinfo("Initialize"); 
+           trainInfo = Info;//netWork.Getinfo("Initialize"); 
            TrainID = StringSplitter.GetTrainId(trainInfo);
            trainUnits = StringSplitter.GetUnitAmount(trainInfo);
            UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
@@ -50,9 +48,9 @@ namespace Platform
 
         }
 
-        public void GetSeatInfo()
+        public void GetSeatInfo(string info)
         {
-            seatInfo = netWork.Getinfo("SeatInfo");
+            seatInfo = info;// netWork.Getinfo("SeatInfo");
             if((OldSeatInfo.Length - 3) > seatInfo.Length)
             {
                 UnitsChanged = true;
@@ -101,6 +99,11 @@ namespace Platform
             }
             
             return DisplaysString.ToString();
+        }
+
+        public string read(string Information)
+        {
+            return netWork.Getinfo(Information);
         }
     }
 }

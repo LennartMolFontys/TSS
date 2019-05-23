@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Platform;
-
+/*
 namespace UnitTestProject1
 {
     // kan alleen aan gesloten worden als arduino is aangesloten
@@ -53,4 +53,4 @@ namespace UnitTestProject1
             Assert.AreEqual(false, display.connected);
         }
     }
-}
+}*/
