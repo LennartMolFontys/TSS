@@ -19,16 +19,23 @@ namespace Platform
 
         public int GetFreeSeats(int SeatsTaken)
         {
-            int value = SeatsTotal - SeatsTaken;
+            int value = 0;
+            if (SeatsTaken >= 0)
+            {
+              value = SeatsTotal - SeatsTaken;
 
-            if(value < 0)
-            {
-                return 0;
+                if (value < 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return value;
+                }
             }
-            else
-            {
-                return value;
-            }       
+
+            return value;
+     
         }
     }
 }
