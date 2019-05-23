@@ -48,13 +48,17 @@ namespace Platform
 
         public string Getinfo (string send)
         {
-            // ask Train How many seats are Taken
-            byte[] SendMessage = Encoding.ASCII.GetBytes(send);
-            Stream.Write(SendMessage, 0, SendMessage.Length);
+            string info = "";
+            if (!string.IsNullOrEmpty(send))
+            {
+                // ask Train How many seats are Taken
+                byte[] SendMessage = Encoding.ASCII.GetBytes(send);
+                Stream.Write(SendMessage, 0, SendMessage.Length);
 
-            // Get Answer Train
-            int num = Stream.Read(bytes, 0, bytes.Length);
-            string info = Encoding.ASCII.GetString(bytes, 0, num);
+                // Get Answer Train
+                int num = Stream.Read(bytes, 0, bytes.Length);
+                 info = Encoding.ASCII.GetString(bytes, 0, num);
+            }
 
             return info;
         }
