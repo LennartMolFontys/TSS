@@ -7,9 +7,10 @@ int maxNumberOfSeats = 255;
 int lengthOfTrain = 7;
 
 void sendSeats() {
-  Wire.write(seatsTaken);
   Wire.write(maxNumberOfSeats);
   Wire.write(lengthOfTrain);
+  Wire.write(seatsTaken);
+  Wire.write(3);                                    //Test, later verwijderen
   Serial.println(seatsTaken);
 }
 
@@ -28,6 +29,10 @@ int readAddress() {
   else{
     return -1;
   }
+}
+
+void SetSeatsTaken(int taken){
+  seatsTaken = taken;
 }
 
 void sendAddress(int address){
