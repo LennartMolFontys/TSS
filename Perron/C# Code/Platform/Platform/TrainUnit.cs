@@ -17,7 +17,7 @@ namespace Platform
             SeatsTotal = seatsTotal;
         }
 
-        public abstract int GetFreeSeats(int[,] SeatsTaken);
+        public abstract int GetFreeSeats(List<List<int>> SeatsTaken);
         public abstract void AddSeats();
 
     }
