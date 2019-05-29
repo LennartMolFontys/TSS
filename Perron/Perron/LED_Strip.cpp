@@ -1,35 +1,62 @@
 #include "LED_Strip.h"
+LEDStrip strips[maxStrips];
+int numberOfStrips;
 
-void SetUpLedStrip() {
-  pinMode(LED1Red, OUTPUT);
-  pinMode(LED1Green, OUTPUT);
-  pinMode(LED2Red, OUTPUT);
-  pinMode(LED2Green, OUTPUT);
-  pinMode(LED3Red, OUTPUT);
-  pinMode(LED3Green, OUTPUT);
+void SetUpLedStrip(int* ledPinArray, int amountOfStrips) {
+  numberOfStrips = amountOfStrips;
+  for(int i = 0; i < numberOfStrips; i++)
+  {
+    strips[i].RedPin = ledPinArray[2*i];
+    strips[i].GreenPin = ledPinArray[(2*i) + 1];
+    pinMode(strips[i].RedPin, OUTPUT);
+    pinMode(strips[i].GreenPin, OUTPUT);
+  }
 }
 
 bool WriteToLEDStrip(String messageToDisplay)
 {
-  static int stripNumber = 0;
-  int red = 0;
-  int green = 0;
+  static int stripNumber = firstStrip;
+  int red = off;
+  int green = off;
 
-  int numberOfSeats = messageToDisplay.substring((stripNumber * 4), (stripNumber * 4) + 4).toInt();
-  if (numberOfSeats <= 5)
+  int numberOfSeats = messageToDisplay.substring((stripNumber * numberOfDigits), (stripNumber * numberOfDigits) + numberOfDigits).toInt();
+  
+  if (numberOfSeats <= numberOfSeatsFull)
   {
-    red = 255;
-    green = 0;
+    strips[stripNumber].RedValue = on;
+    strips[stripNumber].GreenValue = off;
   }
-  else if (numberOfSeats <= 20)
+  else if (numberOfSeats <= numberOfSeatsBusy)
   {
-    red = 255;
-    green = 30;
+    strips[stripNumber].RedValue = on;
+    strips[stripNumber].GreenValue = greenHalf;
   }
   else
   {
-    red = 0;
-    green = 100;
+    strips[stripNumber].RedValue = off;
+    strips[stripNumber].GreenValue = greenFull;
+  }
+
+  analogWrite(strips[stripNumber].RedPin, strips[stripNumber].RedValue);
+  analogWrite(strips[stripNumber].GreenPin, strips[stripNumber].GreenValue);
+
+
+
+/*
+  if (numberOfSeats <= numberOfSeatsFull)
+  {
+    red = on;
+    green = off;
+  }
+  else if (numberOfSeats <= numberOfSeatsBusy)
+  {
+    red = on;
+    green = greenHalf;
+  }
+  else
+  {
+    red = off;
+    green = greenFull;
   }
   switch (stripNumber)
   {
@@ -48,9 +75,10 @@ bool WriteToLEDStrip(String messageToDisplay)
       analogWrite(LED3Green, green);
       break;
   }
-  if ((stripNumber + 1) >= ((messageToDisplay.length() + 1) / 4))
+  */
+  if ((stripNumber + 1) >= ((messageToDisplay.length() + 1) / numberOfDigits))
   {
-    stripNumber = 0;
+    stripNumber = firstStrip;
     return true;
   }
   else

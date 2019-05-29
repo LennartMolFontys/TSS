@@ -17,6 +17,7 @@ void SetUpSeatPins() {
 }
 
 int GetTakenSeats() {
+  CheckSeats();
   int takenSeats = 0;
   for (int i = 0; i < ROWS; i++) {
     for (int j = 0; j < SEATS_PER_ROW; j++) {
