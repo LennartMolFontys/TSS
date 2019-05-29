@@ -3,14 +3,24 @@
 
 #include <Arduino.h>
 
-#define LED1Red 3    // LED strip #1
-#define LED1Green 5
-#define LED2Red 6    // LED strip #2
-#define LED2Green 9
-#define LED3Red 10   // LED strip #3
-#define LED3Green 11
+#define maxStrips 20
+#define firstStrip 0
+#define numberOfDigits 4
+#define numberOfSeatsFull 5
+#define numberOfSeatsBusy 20
+#define off 0
+#define on 255
+#define greenFull 100
+#define greenHalf 30
 
-void SetUpLedStrip();
+typedef struct {
+  int RedPin;
+  int GreenPin;
+  int RedValue = 0;
+  int GreenValue = 0;
+} LEDStrip;
+
+void SetUpLedStrip(int* ledPinArray, int numberOfStrips);
 bool WriteToLEDStrip(String messageToDisplay);
 
 #endif
