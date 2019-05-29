@@ -30,10 +30,13 @@ namespace Platform
 
         private void Add(int trainID)
         {
-            train = new Train(trainID);
-            for(int i = 0; i < trainUnits; i ++)
+            if (TrainID > 0)
             {
-                train.Add(UnitInfo[i, 0], UnitInfo[i, 1]);
+                train = new Train(trainID);
+                for (int i = 0; i < trainUnits; i++)
+                {
+                    train.Add(UnitInfo[i, 0], UnitInfo[i, 1]);
+                }
             }
         }
 
