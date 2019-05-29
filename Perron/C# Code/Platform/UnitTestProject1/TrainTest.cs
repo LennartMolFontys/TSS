@@ -23,12 +23,6 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void TestConstructorNOTCorrect()
-        {
-            Assert.AreNotEqual(0, test.TrainId);
-        }
-
-        [TestMethod]
         public void AddTrainUnit()
         {
             // arrange
@@ -42,18 +36,6 @@ namespace UnitTestProject1
             Assert.AreEqual(1, test.trainUnits.Count);
             Assert.AreEqual(5, test.trainUnits[0].Length);
             Assert.AreEqual(10, test.trainUnits[0].SeatsTotal);
-        }
-
-        [TestMethod]
-        public void AddTrainUnitFAil()
-        {
-            // arrange
-            int lenght = -1;
-            int Totalseats = 20;
-
-            //set
-            test.Add(lenght, Totalseats);
-            Assert.AreEqual(0, test.trainUnits.Count);
         }
     }
 }

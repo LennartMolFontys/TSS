@@ -8,11 +8,11 @@ using System.IO;
 
 namespace Platform
 {
-    public class Display : IDisplay
+    public class Display
     {
         private SerialPort serialPort = new SerialPort();
         public int COM_Port { get; private set; }
-        public bool Connected { get; private set; }
+        public bool connected { get; private set; }
 
         public Display (int COM_Port)
         {
@@ -26,18 +26,18 @@ namespace Platform
             serialPort.Open();
             if (!serialPort.IsOpen)
             {
-                Connected = false;
+                connected = false;
                 serialPort.Close();
             }
 
         }
 
-        public void Disconnect()
+        public void CloseSerialPort()
         {
             if(serialPort.IsOpen)
             {
                 serialPort.Close();
-                Connected = false;
+                connected = false;
             }
         }
 

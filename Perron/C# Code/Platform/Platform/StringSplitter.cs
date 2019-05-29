@@ -8,7 +8,7 @@ namespace Platform
 {
     static class StringSplitter
     {
-        public static string InitializeFormat { get; } = "ID:<value>UnitAmount:<value>Length:<value>TotalSeats:<value>Length:<value>TotalSeats:<value>...";
+        public static string InitializeFormat { get; } = "ID:<value>UnitAmount:<value>Length:<value>TotalSeats:<value><value>Length:<value>TotalSeats:<value>...";
         public static string SeatOccupationFormat { get; } = "SeatsTaken:<value>SeatsTaken:<value>...";
         private static string[] splitStrings = new string[] { "Length:", "TotalSeats:", "SeatsTaken:" };
 
