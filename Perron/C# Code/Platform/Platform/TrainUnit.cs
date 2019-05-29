@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Platform
 {
-    public class TrainUnit
+    public abstract class TrainUnit
     {
         public int Length { get;  private set; }
         public int SeatsTotal { get; private set; }
@@ -17,25 +17,8 @@ namespace Platform
             SeatsTotal = seatsTotal;
         }
 
-        public int GetFreeSeats(int SeatsTaken)
-        {
-            int value = 0;
-            if (SeatsTaken >= 0)
-            {
-              value = SeatsTotal - SeatsTaken;
+        public abstract int GetFreeSeats(int[,] SeatsTaken);
+        public abstract void AddSeats();
 
-                if (value < 0)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return value;
-                }
-            }
-
-            return value;
-     
-        }
     }
 }

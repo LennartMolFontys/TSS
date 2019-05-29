@@ -10,6 +10,7 @@ namespace Platform
     {
         public List<TrainUnit> trainUnits { get; private set; }
         public int TrainId { get; private set; }
+        private TrainUnit unit;
 
         public Train(int trainId)
         {
@@ -21,8 +22,16 @@ namespace Platform
         {
             if(lenght > 0 && seatsTotal > 0)
             {
-                TrainUnit unit = new TrainUnit(lenght, seatsTotal);
-                trainUnits.Add(unit);
+                if(seatsTotal < 100)
+                {
+                     unit = new MultiFloor(lenght, seatsTotal);
+                    trainUnits.Add(unit);
+                }
+                else
+                {
+                    unit = new SingleFloor(lenght, seatsTotal);  
+                }
+ 
             }
                      
         }
