@@ -12,7 +12,7 @@ void setup() {
 void loop() {
   if (!isConnected) {
     address = readAddress();
-    if (address != 0) {
+    if (address != -1) {
       Connect(address);
       isConnected = true;
     }

@@ -8,6 +8,7 @@ void setup() {
 }
 
 void loop() {
+  SendAddress();
   if (currentCarriage == 1) {
     NewMessage();
   }
@@ -17,5 +18,4 @@ void loop() {
   else {
     currentCarriage++;
   }
-  delay(500);
 }

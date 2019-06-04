@@ -10,7 +10,7 @@ void sendSeats() {
   Wire.write(maxNumberOfSeats);
   Wire.write(lengthOfTrain);
   Wire.write(seatsTaken);
-  Wire.write(3);                                    //Test, later verwijderen
+  Wire.write(0);                                    // Single Floor
   Serial.println(seatsTaken);
 }
 
@@ -48,4 +48,5 @@ void Connect(int connectToAddress) {
 
 void SetUpCommunication(){
   addressBus.begin(9600);
+  Serial.begin(9600);
 }

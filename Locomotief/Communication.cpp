@@ -13,6 +13,11 @@ void NewMessage() {
   Serial.println("");
 }
 
+void SendAddress()
+{
+  addressBus.println("#1%");
+}
+
 bool RequestSeats(int carriage)
 {
   Wire.requestFrom(carriage, 4);
