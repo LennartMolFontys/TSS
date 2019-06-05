@@ -14,8 +14,8 @@ void setup() {
 
 void loop() {
   if (!isConnected) {
-    address = readAddress();
-    if (address != -1) {
+    readAddress(&address);
+    if (address != 0) {
       Connect(address);
       isConnected = true;
     }
@@ -26,6 +26,6 @@ void loop() {
   SetSeatsTaken(GetTakenSeats());
 
   getAllSeats(seatArray);
-  Serial.println(seatArray[0][0]);
+  Serial.println(address);
   updateMatrix(0, seatArray);
 }

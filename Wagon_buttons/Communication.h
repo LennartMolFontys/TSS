@@ -13,11 +13,11 @@ void SetUpCommunication();
 
 void sendSeats();
 
-int readAddress();
+int readAddress(int* addressToConnect);
 
 void SetSeatsTaken(int taken);
 
-void sendAddress(int address);
+void sendAddress(int addressToSend);
 
 void Connect(int connectToAddress);
 

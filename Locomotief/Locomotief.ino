@@ -5,7 +5,7 @@ int currentCarriage = 1;
 int lastTime = 0;
 int seatsTaken = 0;
 int lengthOfTrain = 7;
-int totalSeats = 255;
+int totalSeats = 90;
 unsigned long timeToWait = 0;
 
 

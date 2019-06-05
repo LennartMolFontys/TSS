@@ -33,3 +33,10 @@ D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug
 D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
 D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.exe
 D:\documenten\semester2\Proftaak\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe.config
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.exe
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\bin\Debug\SocketClient.pdb
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csprojAssemblyReference.cache
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.csproj.CoreCompileInputs.cache
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.exe
+C:\Users\pimvl\Documents\GitHub\TSS\sockets\SocketClient\SocketClient\obj\Debug\SocketClient.pdb
