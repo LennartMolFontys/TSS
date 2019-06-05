@@ -11,6 +11,7 @@
 void SetUpCommunication();
 void NewMessage();
 void SendAddress();
+void SendFirstSeats(int totalSeats, int lengthOfTrain, int seatsTaken);
 bool RequestSeats(int carriage);
 
 #endif
