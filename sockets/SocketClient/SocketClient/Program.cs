@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 
-namespace SocketClient
+namespace Platform
 {
     class Program
     {
@@ -14,7 +14,9 @@ namespace SocketClient
         private static string initializeInfo = "";
         private static string seatInfo = "";
         public static SerialMessenger serial;
-        
+
+       
+
         static void Main(string[] args)
         {
             const int port = 8888;
@@ -73,29 +75,15 @@ namespace SocketClient
 
         }
 
+
         public static void ReadMessage()
         {
             string message = serial.ReadMessages();
             
             if (message != null || message != string.Empty)
             {
-                string[] stringValues = message.Split(new string[] { "[", "] [", "]" }, StringSplitOptions.RemoveEmptyEntries);
-                StringBuilder sb = new StringBuilder();
-                seatInfo = "";
-                for (int i = 1; i < stringValues.Count()-3; i +=4)
-                {
-                    sb.Clear();
-                    sb.AppendFormat("SeatsTaken:{0}", stringValues[i]);
-                    seatInfo += sb;
-                }
-                int unitAmount = stringValues.Count() / 4;
-                initializeInfo = "ID:" + trainID.ToString() + "UnitAmount:" + unitAmount.ToString();
-                for (int i = 1; i <= unitAmount; i++)
-                {
-                    initializeInfo = initializeInfo + "Length:" + stringValues[i*4-1] + "TotalSeats:" + stringValues[i*4-2] ;
-                }
-
-                initializeInfo = initializeInfo + "\n";
+                initializeInfo = StringFormatter.BuildInitializeString(message, trainID);
+                seatInfo = StringFormatter.BuildSeatInfoString(message);
             }
 
         }

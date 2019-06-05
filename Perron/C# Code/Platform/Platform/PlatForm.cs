@@ -47,9 +47,9 @@ namespace Platform
             {
                 UnitsChanged = false;
                 trainInfo = Info;
-                TrainID = StringSplitter.GetTrainId(trainInfo);
-                trainUnits = StringSplitter.GetUnitAmount(trainInfo);
-                UnitInfo = StringSplitter.GetUnitInfo(trainInfo);
+                TrainID = StringFormatter.GetTrainId(trainInfo);
+                trainUnits = StringFormatter.GetUnitAmount(trainInfo);
+                UnitInfo = StringFormatter.GetUnitInfo(trainInfo);
                 Add(TrainID);
             }
         }
@@ -70,7 +70,7 @@ namespace Platform
                     UnitsChanged = true;
                     OldSeatInfo = seatInfo;
                 }
-                SeatsTaken = StringSplitter.GetSeatsTaken(seatInfo);
+                SeatsTaken = StringFormatter.GetSeatsTaken(seatInfo);
                 OldSeatInfo = seatInfo;
                 FreeSeats();
             }

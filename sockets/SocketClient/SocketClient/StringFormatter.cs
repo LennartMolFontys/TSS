@@ -6,17 +6,59 @@ using System.Threading.Tasks;
 
 namespace Platform
 {
-    static class StringSplitter
+    static class StringFormatter
     {
         public static string InitializeFormat { get; } = "ID:<value>UnitAmount:<value>Length:<value>TotalSeats:<value>Length:<value>TotalSeats:<value>...";
+        private static string[] initializeHeaders = { "ID:", "UnitAmount:", "Length:", "TotalSeats:" };
         public static string SeatOccupationFormat { get; } = "SeatsTaken:<value>SeatsTaken:<value>...";
-        private static string[] splitStrings = new string[] { "Length:", "TotalSeats:", "SeatsTaken:" };
+        private static string[] seatOccupationHeaders = { "SeatsTaken:" };
 
+
+        private static char[] serialSplitCharacter = { '|' };
+        private static int amountOfTrainUnitVariables = 4;
+        private static int lengthPosition = 2;
+        private static int totalSeatPosition = 3;
+        private static int seatsTakenPosition = 4;
+
+        public static string BuildSeatInfoString(string serialString)
+        {
+            if (string.IsNullOrEmpty(serialString))
+            {
+                throw new ArgumentNullException(nameof(serialString));
+            }
+            string[] trainUnitValues = serialString.Split(serialSplitCharacter, StringSplitOptions.RemoveEmptyEntries);
+            int unitAmount = trainUnitValues.Count() / amountOfTrainUnitVariables;
+
+            string seatInfo = "";
+            for (int unitNr = 0; unitNr < unitAmount; unitNr++)
+            {
+                seatInfo = seatInfo + "SeatsTaken:" + trainUnitValues[unitNr * amountOfTrainUnitVariables + seatsTakenPosition];
+            }
+            return seatInfo;
+        }
+
+        public static string BuildInitializeString(string serialString, int trainID)
+        {
+            if (string.IsNullOrEmpty(serialString))
+            {
+                throw new ArgumentNullException(nameof(serialString));
+            }
+            string[] trainUnitValues = serialString.Split(serialSplitCharacter, StringSplitOptions.RemoveEmptyEntries);
+            int unitAmount = trainUnitValues.Count() / amountOfTrainUnitVariables;
+
+            string initializeInfo = "ID:" + trainID.ToString() + "UnitAmount:" + unitAmount.ToString();
+            for (int unitNr = 0; unitNr < unitAmount; unitNr++)
+            {
+                initializeInfo = initializeInfo + "Length:" + trainUnitValues[unitNr * amountOfTrainUnitVariables + lengthPosition]
+                                                + "TotalSeats:" + trainUnitValues[unitNr * amountOfTrainUnitVariables + totalSeatPosition];
+            }
+            return initializeInfo;
+        }
 
         public static int GetTrainId(string initialiseString)
         {
             int id = 0;
-            if(!string.IsNullOrEmpty(initialiseString))
+            if (!string.IsNullOrEmpty(initialiseString))
             {
                 try
                 {
@@ -29,7 +71,7 @@ namespace Platform
             }
             return id;
         }
-        
+
         public static int GetUnitAmount(string initialiseString)
         {
             int unitAmount = 0;
@@ -37,7 +79,7 @@ namespace Platform
             {
                 try
                 {
-                     unitAmount = getValueBetweenStrings(initialiseString, "UnitAmount:", "Length:");
+                    unitAmount = getValueBetweenStrings(initialiseString, "UnitAmount:", "Length:");
                 }
                 catch (FormatException)
                 {
@@ -49,14 +91,14 @@ namespace Platform
 
         }
 
-        
+
         public static int[] GetSeatsTaken(string someString)
         {
             try
             {
-                return getValuesFromString(someString, splitStrings);
+                return getValuesFromString(someString, seatOccupationHeaders);
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 throw new FormatException("Expected: " + SeatOccupationFormat + "\ngot: " + someString);
             }
@@ -64,22 +106,24 @@ namespace Platform
 
         public static int[,] GetUnitInfo(string someString)
         {
+            int amountOfVariables = 2;
             someString = someString.Substring(someString.IndexOf("Length:"));
             int[] values;
             try
             {
-                values = getValuesFromString(someString, splitStrings);
+                values = getValuesFromString(someString, initializeHeaders);
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 throw new FormatException("Expected: " + InitializeFormat + "\ngot: " + someString);
             }
-            int[,] unitInfo = new int[values.Count() / 2, 2];
-            for (int i = 0; i < values.Count()/2 ; i++)
+            int amountOfUnits = values.Count() / amountOfVariables;
+            int[,] unitInfo = new int[amountOfUnits, amountOfVariables];
+            for (int unit = 0; unit < amountOfUnits; unit++)
             {
-                for (int ii = 0; ii < 2; ii++)
+                for (int variableNr = 0; variableNr < amountOfVariables; variableNr++)
                 {
-                    unitInfo[i, ii] = values[2 * i + ii];
+                    unitInfo[unit, variableNr] = values[amountOfVariables * unit + variableNr];
                 }
             }
             return unitInfo;
@@ -122,4 +166,5 @@ namespace Platform
             }
         }
     }
+
 }
