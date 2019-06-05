@@ -35,7 +35,7 @@ namespace Platform
                 Console.WriteLine("Connected!");
                 NetworkStream stream = clientSock.GetStream();
 
-                serial = new SerialMessenger("COM8", 9600, '#', '%');
+                serial = new SerialMessenger("COM7", 9600, '#', '%');
                 serial.Connect();
 
                 while (sendLine != "quit")

@@ -17,8 +17,8 @@ namespace Platform
         private static char[] serialSplitCharacter = { '|' };
         private static int amountOfTrainUnitVariables = 4;
         private static int lengthPosition = 2;
-        private static int totalSeatPosition = 3;
-        private static int seatsTakenPosition = 4;
+        private static int totalSeatPosition = 1;
+        private static int seatsTakenPosition = 3;
 
         public static string BuildSeatInfoString(string serialString)
         {
