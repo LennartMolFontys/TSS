@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.IO.Ports;
 
-namespace SocketClient
+namespace Platform
 {
     /// Class to send / receive messages using the serial port.
     public class SerialMessenger
