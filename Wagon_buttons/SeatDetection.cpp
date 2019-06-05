@@ -43,3 +43,11 @@ void CheckSeats() {
     digitalWrite(rowPins[i], LOW);
   }
 }
+
+void getAllSeats(bool seatArray[4][4]) {
+  for (int y = 0; y < 4; y++) {
+    for (int x = 0; x < 4; x++) {
+      seatArray[y][x] = seats[y][x];
+    }
+  }
+}

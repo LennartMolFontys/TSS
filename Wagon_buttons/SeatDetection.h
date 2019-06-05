@@ -14,4 +14,6 @@ int GetTakenSeats();
 
 void CheckSeats();
 
+void getAllSeats(bool seatArray[4][4]);
+
 #endif
