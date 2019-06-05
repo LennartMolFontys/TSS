@@ -62,7 +62,6 @@
     <Compile Include="StringFormatter.cs" />
     <Compile Include="Seat.cs" />
     <Compile Include="SingleFloor.cs" />
-    <Compile Include="StringSplitter.cs" />
     <Compile Include="Train.cs" />
     <Compile Include="TrainUnit.cs" />
     <EmbeddedResource Include="Form1.resx">

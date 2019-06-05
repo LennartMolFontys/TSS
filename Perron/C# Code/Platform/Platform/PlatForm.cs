@@ -13,7 +13,7 @@ namespace Platform
         private string seatInfo = "";
         public Train train { get; private set; }
         private int[,] UnitInfo;
-        private int[] SeatsTaken;
+        private List<List<int>> SeatsTaken;
         public int[] freeSeats { get; private set; }
         public int trainUnits { get; private set; }
         private string OldSeatInfo = "";
@@ -81,7 +81,7 @@ namespace Platform
             freeSeats = new int[trainUnits];
             for(int i = 0; i < trainUnits; i++)
             {
-                freeSeats[i] = train.trainUnits[i].GetFreeSeats(SeatsTaken[i]);
+                freeSeats[i] = train.trainUnits[i].GetFreeSeats(SeatsTaken);
             }
         }
 
