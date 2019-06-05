@@ -22,16 +22,16 @@ namespace Platform
         {
             if(lenght > 0 && seatsTotal > 0)
             {
-                if(seatsTotal < 100)
+                if(seatsTotal > 100)
                 {
                      unit = new MultiFloor(lenght, seatsTotal);
-                    trainUnits.Add(unit);
+                    
                 }
                 else
                 {
                     unit = new SingleFloor(lenght, seatsTotal);  
                 }
- 
+                trainUnits.Add(unit);
             }
                      
         }

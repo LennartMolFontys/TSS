@@ -36,17 +36,14 @@ namespace Platform
             }
         }
 
-        public override int GetFreeSeats(List<List<int>> SeatsTaken)
+        public override int GetFreeSeats(List<int> SeatsTaken)
         {
             int freeSeats = 0;
             if(SeatsTaken != null)
             {
                 for(int i = 0; i < SeatsTaken.Count; i++)
                 {
-                    for(int j = 0; j < SeatsTaken[i].Count; i++)
-                    {
-                        freeSeats += floors[i] - SeatsTaken[i][j];
-                    }
+                        freeSeats += floors[i] - SeatsTaken[i];
                 }
 
                 return freeSeats;

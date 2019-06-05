@@ -71,8 +71,12 @@ namespace Platform
                     OldSeatInfo = seatInfo;
                 }
                 SeatsTaken = StringFormatter.GetSeatsTaken(seatInfo);
-                OldSeatInfo = seatInfo;
-                FreeSeats();
+                if(SeatsTaken.Count > 0)
+                {
+                    OldSeatInfo = seatInfo;
+                    FreeSeats();
+                }
+                
             }
         }
 
@@ -81,7 +85,7 @@ namespace Platform
             freeSeats = new int[trainUnits];
             for(int i = 0; i < trainUnits; i++)
             {
-                freeSeats[i] = train.trainUnits[i].GetFreeSeats(SeatsTaken);
+                freeSeats[i] = train.trainUnits[i].GetFreeSeats(SeatsTaken[i]);
             }
         }
 

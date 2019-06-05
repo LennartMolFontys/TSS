@@ -22,6 +22,12 @@ namespace Platform
         {
             InitializeComponent();
             AddLAbels();
+            setUpConnection();
+            timer1.Start();
+        }
+
+        private void setUpConnection()
+        {
             try
             {
                 platForm.Connect("145.93.173.26", 8888);
@@ -32,22 +38,21 @@ namespace Platform
                 MessageBox.Show("Failed to Connect to Host");
                 Environment.Exit(1);
             }
-            catch(UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("The COM-Port is already in use");
                 Environment.Exit(1);
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("The Baundrate or the Port name are Incorrect");
                 Environment.Exit(1);
             }
-            catch(IOException)
+            catch (IOException)
             {
                 MessageBox.Show("The Comport is Incorrect");
                 Environment.Exit(1);
             }
-            timer1.Start();
         }
 
         private void LabelFiller()
@@ -73,26 +78,32 @@ namespace Platform
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
-            if (initialize == false)
+            try
             {
-                string info = platForm.read("Initialize");
-                platForm.GetTrainInfo(info);
-                idLabel.Text = platForm.TrainID.ToString();
-                initialize = true;
-            }
-            else
-            {
-                string info = platForm.read("SeatInfo");
-                platForm.GetSeatInfo(info);
-                if (platForm.UnitsChanged == true)
+                if (initialize == false)
                 {
-                    initialize = false;
-                    ResetLabels();
-                    return;
+                    string info = platForm.read("Initialize");
+                    platForm.GetTrainInfo(info);
+                    idLabel.Text = platForm.TrainID.ToString();
+                    initialize = true;
                 }
-                LabelFiller();
-                display.Send(platForm.send());
+                else
+                {
+                    string info = platForm.read("SeatInfo");
+                    platForm.GetSeatInfo(info);
+                    if (platForm.UnitsChanged == true)
+                    {
+                        initialize = false;
+                        ResetLabels();
+                        return;
+                    }
+                    LabelFiller();
+                    display.Send(platForm.send());
+                }
+            }
+            catch (IOException exception)
+            {
+                setUpConnection();
             }
 
         }
