@@ -3,29 +3,37 @@ SoftwareSerial addressBus(addressBusRX, addressBusTX);
 
 int numberOfCarriages = 1;
 
-void SetUpCommunication(){
+void SetUpCommunication() {
   addressBus.begin(9600);
   Wire.begin();
   Serial.begin(9600);
 }
 
-void NewMessage(){
+void NewMessage() {
   Serial.println("");
+}
+
+void SendAddress()
+{
+  addressBus.println("#1%");
 }
 
 bool RequestSeats(int carriage)
 {
-  Wire.requestFrom(carriage, 3);
+  Wire.requestFrom(carriage, 4);
   if (Wire.available()) {
-    Serial.print("[");
     Serial.print(carriage);
-    Serial.print("] [");
+    Serial.print("|");
     Serial.print(Wire.read());
-    Serial.print("] [");
+    Serial.print("|");
     Serial.print(Wire.read());
-    Serial.print("] [");
+    Serial.print("|");
     Serial.print(Wire.read());
-    Serial.print("] ");
+    int secondFloor = Wire.read();
+    if (secondFloor != 0) {
+      Serial.print(",");
+      Serial.print(Wire.read());
+    }
     return true;
   }
   else {

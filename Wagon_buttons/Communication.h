@@ -15,7 +15,9 @@ void sendSeats();
 
 int readAddress();
 
-int sendAddress(int address);
+void SetSeatsTaken(int taken);
+
+void sendAddress(int address);
 
 void Connect(int connectToAddress);
 

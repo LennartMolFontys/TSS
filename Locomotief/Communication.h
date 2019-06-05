@@ -10,6 +10,7 @@
 
 void SetUpCommunication();
 void NewMessage();
+void SendAddress();
 bool RequestSeats(int carriage);
 
 #endif
