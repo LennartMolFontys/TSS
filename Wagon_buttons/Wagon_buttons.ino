@@ -2,6 +2,11 @@
 #include "Communication.h"
 #include "MAX7219Matrix.h"
 
+#define DIN 12
+#define CLK 11
+#define LOAD 10
+#define NR_OF_DISPLAYS 1
+
 bool seatArray[4][4];
 int address = 0;
 bool isConnected = false;
@@ -9,7 +14,7 @@ bool isConnected = false;
 void setup() {
   SetUpCommunication();
   SetUpSeatPins();
-  setUpMatrix(12, 11, 10, 1);
+  setUpMatrix(DIN, CLK, LOAD, NR_OF_DISPLAYS);
 }
 
 void loop() {
