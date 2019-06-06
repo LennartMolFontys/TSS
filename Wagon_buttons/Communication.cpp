@@ -3,7 +3,7 @@ SoftwareSerial addressBus(addressBusRX, addressBusTX);
 
 String addressMessage = "";
 int seatsTaken;
-int maxNumberOfSeats = 16;
+int maxNumberOfSeats = 40;
 int lengthOfTrain = 7;
 
 void sendSeats() {

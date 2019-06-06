@@ -14,7 +14,7 @@ namespace Platform
     public partial class Form1 : Form
     {
         private PlatForm platForm = new PlatForm();
-        private Display display = new Display(13);
+        private Display display = new Display(12);
         private List<Label> labels = new List<Label>();
         bool initialize = false;
 
@@ -30,7 +30,7 @@ namespace Platform
         {
             try
             {
-                platForm.Connect("145.93.173.26", 8888);
+                platForm.Connect("145.93.40.230", 8888);
                 display.Connect();
             }
             catch (InvalidOperationException)

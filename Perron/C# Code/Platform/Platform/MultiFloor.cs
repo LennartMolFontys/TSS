@@ -11,7 +11,7 @@ namespace Platform
         private List<Seat> BottomFloorSeats;
         private List<Seat> TopFloorSeats;
         private int NumberOfFloors = 0;
-        private int[] floors;
+        private int[] floors = new int[2];
 
 
         public MultiFloor(int length, int seatsTotal) : base(length, seatsTotal)
